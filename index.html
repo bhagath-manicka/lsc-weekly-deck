@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LSC Weekly Executive Report — Aug 9–15, 2026</title>
+<style>
+  :root {
+    --navy: #032D60; --blue: #00A1E0; --teal: #00698A; --purple: #8B5CF6;
+    --light-bg: #F4F6F9; --white: #FFFFFF; --dark: #1A1A2E; --mid: #6B7280;
+    --green: #059669; --amber: #D97706; --red: #DC2626; --gold: #CA8A04;
+    --card-border: #E5E7EB;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #EEF2F7; color: var(--dark); }
+
+  /* SLIDE CONTAINER */
+  .slide { width: 960px; margin: 24px auto; background: white; border-radius: 8px;
+           box-shadow: 0 4px 20px rgba(0,0,0,.15); overflow: hidden; }
+
+  /* HEADER */
+  .slide-header { background: var(--navy); padding: 14px 20px 10px; position: relative; }
+  .slide-header::after { content:''; display:block; height:4px; background:var(--blue);
+                          margin-top:10px; margin-left:-20px; width:calc(100% + 40px); }
+  .slide-header h1 { color:white; font-size:20px; font-weight:700; }
+  .slide-header .week-badge { float:right; background:rgba(255,255,255,.12);
+    color:#B0C4DE; font-size:11px; padding:4px 10px; border-radius:12px; margin-top:2px; }
+
+  /* FOOTER */
+  .slide-footer { background:var(--navy); color:#B0C4DE; font-size:10px;
+                  text-align:center; padding:6px; }
+
+  /* KPI STRIP */
+  .kpi-strip { display:flex; }
+  .kpi { flex:1; padding:10px 8px; text-align:center; }
+  .kpi:nth-child(odd)  { background:var(--navy); }
+  .kpi:nth-child(even) { background:#05428A; }
+  .kpi .val { font-size:28px; font-weight:700; color:var(--blue); line-height:1.1; }
+  .kpi .lbl { font-size:10px; color:#B0C4DE; margin-top:3px; }
+
+  /* SECTION LABEL */
+  .sec-label { background:var(--navy); color:var(--blue); font-size:11px;
+               font-weight:700; padding:4px 10px; margin-bottom:6px; border-radius:2px; }
+
+  /* SLIDE 1 GRID */
+  .s1-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; padding:12px 16px; }
+  .s1-panel { background:var(--light-bg); border-radius:6px; padding:10px 12px; }
+
+  /* BARS */
+  .bar-row { display:flex; align-items:center; gap:6px; margin-bottom:5px; font-size:12px; }
+  .bar-row .label { width:130px; flex-shrink:0; font-size:11px; color:var(--dark); }
+  .bar-wrap { flex:1; display:flex; flex-direction:column; gap:2px; }
+  .bar { height:10px; border-radius:2px; min-width:2px; transition:width .3s; }
+  .bar.teal   { background:var(--teal); }
+  .bar.purple { background:var(--purple); }
+  .bar-val { font-size:10px; font-weight:700; color:var(--dark); flex-shrink:0; min-width:24px; }
+
+  /* GEO SPLIT */
+  .geo-block { margin-bottom:14px; }
+  .geo-name { font-weight:700; font-size:14px; margin-bottom:4px; }
+  .geo-name.teal { color:var(--teal); }
+  .geo-name.purple { color:var(--purple); }
+  .geo-bar-wrap { margin-bottom:3px; }
+  .geo-bar-label { font-size:10px; color:var(--mid); margin-bottom:2px; }
+  .geo-bar-track { background:#E5E7EB; border-radius:3px; height:12px; }
+  .geo-bar-fill { height:12px; border-radius:3px; }
+
+  /* 16W TREND */
+  .trend-wrap { padding:10px 16px 12px; }
+  .trend-bars { display:flex; align-items:flex-end; gap:3px; height:60px; }
+  .trend-bar { flex:1; border-radius:2px 2px 0 0; position:relative; }
+  .trend-label { font-size:8px; text-align:center; margin-top:2px; color:var(--mid); }
+  .trend-val { position:absolute; top:-14px; left:50%; transform:translateX(-50%);
+               font-size:9px; font-weight:700; }
+
+  /* SLIDE 2 CARDS */
+  .cards-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:12px 16px; }
+  .card { border-radius:6px; overflow:hidden; background:var(--light-bg); }
+  .card-accent { height:4px; }
+  .card-body { padding:10px 12px; }
+  .card-title { font-weight:700; font-size:13px; margin-bottom:6px; }
+  .card ul { list-style:none; padding:0; }
+  .card li { font-size:11px; color:var(--dark); padding:2px 0;
+             padding-left:14px; position:relative; }
+  .card li::before { content:'•'; position:absolute; left:2px; color:var(--mid); }
+  .card-wide { grid-column:1/-1; }
+
+  /* SLIDE 3 */
+  .s3-grid { display:grid; grid-template-columns:1fr 1fr 200px; gap:12px; padding:12px 16px; }
+  .ff-row { display:flex; align-items:center; gap:6px; margin-bottom:6px; }
+  .ff-name { width:140px; font-size:11px; color:var(--dark); flex-shrink:0; }
+  .ff-bar { height:14px; border-radius:2px; background:var(--teal); }
+  .ff-cnt { font-size:11px; font-weight:700; color:var(--dark); margin-left:4px; }
+
+  .rt-card { background:var(--light-bg); border-radius:6px; padding:8px 10px;
+             margin-bottom:8px; }
+  .rt-card .rt-lbl { font-size:10px; color:var(--mid); }
+  .rt-card .rt-val { font-size:20px; font-weight:700; }
+
+  /* GUS banner */
+  .gus-banner { background:#FEF3C7; border-left:4px solid #D97706;
+                padding:8px 14px; margin:0 16px 12px; border-radius:4px;
+                font-size:12px; color:#92400E; }
+
+  /* LEGEND */
+  .legend { display:flex; gap:16px; font-size:11px; color:var(--mid); margin-top:6px; }
+  .legend-dot { display:inline-block; width:12px; height:12px;
+                border-radius:2px; margin-right:4px; vertical-align:middle; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 1 — EXECUTIVE DASHBOARD -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <span class="week-badge">Aug 9 – 15, 2026</span>
+    <h1>LSC Weekly Executive Dashboard</h1>
+  </div>
+
+  <div class="kpi-strip">
+    <div class="kpi"><div class="val">136</div><div class="lbl">Total Cases</div></div>
+    <div class="kpi"><div class="val">87%</div><div class="lbl">IST Share</div></div>
+    <div class="kpi"><div class="val">13%</div><div class="lbl">EMEA Share</div></div>
+    <div class="kpi"><div class="val">32.4%</div><div class="lbl">Closure Rate</div></div>
+    <div class="kpi"><div class="val">44</div><div class="lbl">P1 Critical</div></div>
+    <div class="kpi"><div class="val">20</div><div class="lbl">P2 High+</div></div>
+  </div>
+
+  <div class="s1-grid">
+    <!-- Top Accounts -->
+    <div class="s1-panel">
+      <div class="sec-label">▸ TOP ACCOUNTS BY CASE VOLUME</div>
+      <div id="accounts">
+        <!-- Takeda -->
+        <div class="bar-row"><span class="label">Takeda Pharma</span>
+          <div class="bar-wrap">
+            <div class="bar teal" style="width:100%"></div>
+          </div><span class="bar-val">30</span></div>
+        <div class="bar-row"><span class="label">Mylan Inc.</span>
+          <div class="bar-wrap">
+            <div class="bar teal" style="width:87%"></div>
+            <div class="bar purple" style="width:6%"></div>
+          </div><span class="bar-val">17</span></div>
+        <div class="bar-row"><span class="label">AstraZeneca</span>
+          <div class="bar-wrap">
+            <div class="bar teal" style="width:80%"></div>
+          </div><span class="bar-val">12</span></div>
+        <div class="bar-row"><span class="label">Pfizer EMEA</span>
+          <div class="bar-wrap">
+            <div class="bar teal" style="width:73%"></div>
+          </div><span class="bar-val">11</span></div>
+        <div class="bar-row"><span class="label">IQVIA</span>
+          <div class="bar-wrap">
+            <div class="bar teal" style="width:60%"></div>
+          </div><span class="bar-val">9</span></div>
+        <div class="bar-row"><span class="label">Deloitte Global</span>
+          <div class="bar-wrap">
+            <div class="bar teal" style="width:53%"></div>
+          </div><span class="bar-val">8</span></div>
+        <div class="bar-row"><span class="label">Birlasoft</span>
+          <div class="bar-wrap">
+            <div class="bar teal" style="width:47%"></div>
+          </div><span class="bar-val">7</span></div>
+        <div class="bar-row"><span class="label">Novartis Pharma</span>
+          <div class="bar-wrap">
+            <div class="bar purple" style="width:33%"></div>
+          </div><span class="bar-val">5</span></div>
+        <div class="bar-row"><span class="label">MEDICE GmbH</span>
+          <div class="bar-wrap">
+            <div class="bar purple" style="width:33%"></div>
+          </div><span class="bar-val">5</span></div>
+      </div>
+      <div class="legend">
+        <span><span class="legend-dot" style="background:var(--teal)"></span>IST</span>
+        <span><span class="legend-dot" style="background:var(--purple)"></span>EMEA</span>
+      </div>
+    </div>
+
+    <!-- Severity by Geo -->
+    <div class="s1-panel">
+      <div class="sec-label">▸ SEVERITY BY GEO</div>
+      <div class="bar-row" style="margin-bottom:10px;">
+        <span class="label" style="font-size:12px;font-weight:700;color:var(--red)">P1 Critical</span>
+        <div class="bar-wrap">
+          <div class="bar teal" style="width:100%"></div>
+          <div class="bar purple" style="width:5%"></div>
+        </div><span class="bar-val" style="color:var(--red)">44</span>
+      </div>
+      <div class="bar-row" style="margin-bottom:10px;">
+        <span class="label" style="font-size:12px;font-weight:700;color:var(--amber)">P2 High</span>
+        <div class="bar-wrap">
+          <div class="bar teal" style="width:46%"></div>
+          <div class="bar purple" style="width:2%"></div>
+        </div><span class="bar-val" style="color:var(--amber)">20</span>
+      </div>
+      <div class="bar-row" style="margin-bottom:10px;">
+        <span class="label" style="font-size:12px;font-weight:700;color:var(--teal)">P3 Medium</span>
+        <div class="bar-wrap">
+          <div class="bar teal" style="width:59%"></div>
+          <div class="bar purple" style="width:14%"></div>
+        </div><span class="bar-val">32</span>
+      </div>
+      <div class="bar-row">
+        <span class="label" style="font-size:12px;font-weight:700;color:var(--mid)">P4 Low</span>
+        <div class="bar-wrap">
+          <div class="bar teal" style="width:71%"></div>
+          <div class="bar purple" style="width:21%"></div>
+        </div><span class="bar-val">39</span>
+      </div>
+      <div class="legend" style="margin-top:12px;">
+        <span><span class="legend-dot" style="background:var(--teal)"></span>IST</span>
+        <span><span class="legend-dot" style="background:var(--purple)"></span>EMEA</span>
+      </div>
+      <div style="margin-top:12px;font-size:11px;color:var(--mid);">
+        <b>Note:</b> P-level mapped from internal score field:<br>
+        0→P1 · 13-16→P2 · 26-31→P3 · 45-70→P4
+      </div>
+    </div>
+
+    <!-- Geo Split & Closure -->
+    <div class="s1-panel">
+      <div class="sec-label">▸ GEO SPLIT & CLOSURE</div>
+      <div class="geo-block">
+        <div class="geo-name teal">IST</div>
+        <div class="geo-bar-wrap">
+          <div class="geo-bar-label">118 cases</div>
+          <div class="geo-bar-track">
+            <div class="geo-bar-fill" style="width:100%;background:var(--teal)"></div>
+          </div>
+        </div>
+        <div class="geo-bar-wrap" style="margin-top:4px;">
+          <div class="geo-bar-label">Closure: 30.5% (36 closed)</div>
+          <div class="geo-bar-track">
+            <div class="geo-bar-fill" style="width:30.5%;background:#004F69"></div>
+          </div>
+        </div>
+      </div>
+      <div class="geo-block">
+        <div class="geo-name purple">EMEA</div>
+        <div class="geo-bar-wrap">
+          <div class="geo-bar-label">18 cases</div>
+          <div class="geo-bar-track">
+            <div class="geo-bar-fill" style="width:15%;background:var(--purple)"></div>
+          </div>
+        </div>
+        <div class="geo-bar-wrap" style="margin-top:4px;">
+          <div class="geo-bar-label">Closure: 44.4% (8 closed)</div>
+          <div class="geo-bar-track">
+            <div class="geo-bar-fill" style="width:44.4%;background:#6D28D9"></div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:10px;font-size:11px;">
+        <span style="color:var(--red);font-weight:700;">▲ +57% inflow</span>
+        <span style="color:var(--mid);"> vs 3 weeks ago (87→136)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 16-Week Trend -->
+  <div class="trend-wrap">
+    <div class="sec-label" style="display:inline-block;margin-bottom:8px;">▸ 16-WEEK INFLOW TREND</div>
+    <div class="trend-bars" id="trend"></div>
+    <div style="font-size:10px;color:var(--mid);margin-top:4px;text-align:right;">
+      Week-over-week — current week highlighted in <span style="color:var(--blue);font-weight:700;">blue</span> · all-time high in <span style="color:var(--red);font-weight:700;">red</span>
+    </div>
+  </div>
+  <script>
+    const inflow = [27,59,66,55,27,44,71,62,48,48,46,64,83,94,83,87,136];
+    const maxV = Math.max(...inflow);
+    const wrap = document.getElementById('trend');
+    inflow.forEach((v,i) => {
+      const pct = (v/maxV)*100;
+      const isLast = i===inflow.length-1;
+      const isMax = v===maxV;
+      const col = isLast ? '#00A1E0' : (isMax ? '#DC2626' : '#9CAFC4');
+      const bar = document.createElement('div');
+      bar.className = 'trend-bar';
+      bar.style.cssText = `height:${pct}%;background:${col};flex:1;border-radius:2px 2px 0 0;position:relative;`;
+      if(isLast||isMax){
+        const lbl=document.createElement('span');
+        lbl.className='trend-val';
+        lbl.style.cssText=`position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;color:${col};white-space:nowrap;`;
+        lbl.textContent=v;
+        bar.appendChild(lbl);
+      }
+      wrap.appendChild(bar);
+    });
+  </script>
+
+  <div class="slide-footer">CONFIDENTIAL &nbsp;|&nbsp; LSC P&amp;T Support &nbsp;|&nbsp; EMEA &amp; IST &nbsp;|&nbsp; Aug 9–15, 2026</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 2 — TAKEAWAYS & ACTIONS -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <span class="week-badge">Aug 9 – 15, 2026</span>
+    <h1>Takeaways &amp; Recommended Actions</h1>
+  </div>
+
+  <div class="cards-grid">
+
+    <div class="card">
+      <div class="card-accent" style="background:#DC2626"></div>
+      <div class="card-body">
+        <div class="card-title">🔴 Backlog at Risk</div>
+        <ul>
+          <li>136 new cases this week — all-time high since tracking began (prev: 94)</li>
+          <li>IST closure at 30.5% vs EMEA 44.4% — IST backlog growing rapidly</li>
+          <li>82 IST open cases from this week still pending resolution</li>
+          <li>At 1.6 cases/eng/day: <strong>17 FTEs needed</strong> to clear in one week</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent" style="background:#D97706"></div>
+      <div class="card-body">
+        <div class="card-title">🟠 Account Concentration</div>
+        <ul>
+          <li>Takeda (30) + Mylan (17) + AstraZeneca (12) = <strong>43% of all inflow</strong></li>
+          <li>Takeda is 100% IST — single-team dependency risk at 30 cases</li>
+          <li>Pfizer-EMEA (11) all routed to IST — review geo routing logic</li>
+          <li>Novartis &amp; MEDICE are pure EMEA — watch P3/P4 aging</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent" style="background:#DC2626"></div>
+      <div class="card-body">
+        <div class="card-title">🔴 IST Capacity Risk</div>
+        <ul>
+          <li>16-week trend: 27 → 87 → <strong>136</strong> — 57% surge in 3 weeks</li>
+          <li>IST handles 87% of volume with only 30.5% closure rate</li>
+          <li>44 P1 Critical cases (42 IST, 2 EMEA) — urgent triage required</li>
+          <li>Raise staffing flag: 17 FTE threshold vs current team size</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-accent" style="background:#CA8A04"></div>
+      <div class="card-body">
+        <div class="card-title">🟡 EMEA Signal</div>
+        <ul>
+          <li>EMEA closure rate healthy at 44.4% (8/18 closed)</li>
+          <li>Zero P1 Critical from FIDIA (Italy) or LETI (Spain) this week</li>
+          <li>Novartis (5) &amp; MEDICE (5) are top EMEA accounts — P3/P4 focused</li>
+          <li>Beren Therapeutics new EMEA entry — monitor for escalation risk</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card card-wide">
+      <div class="card-accent" style="background:var(--teal)"></div>
+      <div class="card-body">
+        <div class="card-title">📋 This Week Priorities</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-top:6px;">
+          <div style="font-size:11px;">1. Triage 44 P1 Critical cases — Takeda IST queue first</div>
+          <div style="font-size:11px;">2. Review Pfizer-EMEA geo routing — all 11 cases landed in IST</div>
+          <div style="font-size:11px;">3. BDF sandbox joint session (W-23552985, W-22954128)</div>
+          <div style="font-size:11px;">4. Escalate IST staffing to leadership — 17 FTE threshold</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="slide-footer">CONFIDENTIAL &nbsp;|&nbsp; LSC P&amp;T Support &nbsp;|&nbsp; EMEA &amp; IST &nbsp;|&nbsp; Aug 9–15, 2026</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<!-- SLIDE 3 — SLACK ANALYSIS -->
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <span class="week-badge">Aug 9 – 15, 2026</span>
+    <h1>#ask-lsc-engineering &nbsp;|&nbsp; Slack Analysis</h1>
+  </div>
+
+  <div class="kpi-strip">
+    <div class="kpi"><div class="val">81</div><div class="lbl">Engineering Asks</div></div>
+    <div class="kpi"><div class="val">12</div><div class="lbl">Engineers Active</div></div>
+    <div class="kpi"><div class="val">20.7h</div><div class="lbl">Avg Response</div></div>
+    <div class="kpi"><div class="val">10.2h</div><div class="lbl">Median Response</div></div>
+    <div class="kpi"><div class="val">48%</div><div class="lbl">Response Rate</div></div>
+    <div class="kpi"><div class="val">5</div><div class="lbl">→ GUS Investigations</div></div>
+  </div>
+
+  <div class="s3-grid">
+
+    <!-- Theme Clusters -->
+    <div class="s1-panel">
+      <div class="sec-label">▸ THEME CLUSTERS FROM ASKS</div>
+      <div class="bar-row"><span class="label" style="width:160px;">iPad / Mobile App Issues</span>
+        <div class="bar-wrap"><div class="bar teal" style="width:100%"></div></div><span class="bar-val">18</span></div>
+      <div class="bar-row"><span class="label" style="width:160px;">Configuration &amp; Setup</span>
+        <div class="bar-wrap"><div class="bar teal" style="width:78%"></div></div><span class="bar-val">14</span></div>
+      <div class="bar-row"><span class="label" style="width:160px;">Permission Set / Access</span>
+        <div class="bar-wrap"><div class="bar teal" style="width:56%"></div></div><span class="bar-val">10</span></div>
+      <div class="bar-row"><span class="label" style="width:160px;">Data Sync / Integration</span>
+        <div class="bar-wrap"><div class="bar teal" style="width:50%"></div></div><span class="bar-val">9</span></div>
+      <div class="bar-row"><span class="label" style="width:160px;">Agentforce / AI Features</span>
+        <div class="bar-wrap"><div class="bar teal" style="width:39%"></div></div><span class="bar-val">7</span></div>
+      <div class="bar-row"><span class="label" style="width:160px;">Reporting &amp; Analytics</span>
+        <div class="bar-wrap"><div class="bar teal" style="width:33%"></div></div><span class="bar-val">6</span></div>
+      <div class="bar-row"><span class="label" style="width:160px;">Email / Messaging</span>
+        <div class="bar-wrap"><div class="bar teal" style="width:28%"></div></div><span class="bar-val">5</span></div>
+      <div class="bar-row"><span class="label" style="width:160px;">Other / Misc</span>
+        <div class="bar-wrap"><div class="bar" style="width:67%;background:#9CAFC4;"></div></div><span class="bar-val">12</span></div>
+    </div>
+
+    <!-- Firefighter Responses -->
+    <div class="s1-panel">
+      <div class="sec-label">▸ FIREFIGHTER RESPONSES (39/81 threads)</div>
+      <div class="ff-row"><span class="ff-name">Srikant Chonnad</span>
+        <div class="ff-bar" style="width:calc(23/23 * 160px)"></div><span class="ff-cnt">23</span></div>
+      <div class="ff-row"><span class="ff-name">Tyler Brown</span>
+        <div class="ff-bar" style="width:calc(10/23 * 160px)"></div><span class="ff-cnt">10</span></div>
+      <div class="ff-row"><span class="ff-name">Bharath Kumar NJ</span>
+        <div class="ff-bar" style="width:calc(5/23 * 160px)"></div><span class="ff-cnt">5</span></div>
+      <div class="ff-row"><span class="ff-name">Aditya Sharma</span>
+        <div class="ff-bar" style="width:calc(4/23 * 160px)"></div><span class="ff-cnt">4</span></div>
+      <div class="ff-row"><span class="ff-name">Vishal Sadwal</span>
+        <div class="ff-bar" style="width:calc(2/23 * 160px)"></div><span class="ff-cnt">2</span></div>
+      <div class="ff-row"><span class="ff-name">Berna Berker</span>
+        <div class="ff-bar" style="width:calc(1/23 * 160px)"></div><span class="ff-cnt">1</span></div>
+      <div class="ff-row"><span class="ff-name">Nitesh Rajwar</span>
+        <div class="ff-bar" style="width:calc(1/23 * 160px)"></div><span class="ff-cnt">1</span></div>
+      <div class="ff-row"><span class="ff-name">Ramakrishna</span>
+        <div class="ff-bar" style="width:calc(1/23 * 160px)"></div><span class="ff-cnt">1</span></div>
+      <div class="ff-row"><span class="ff-name">Varun Mittal</span>
+        <div class="ff-bar" style="width:calc(1/23 * 160px)"></div><span class="ff-cnt">1</span></div>
+      <div class="ff-row"><span class="ff-name">Shalini Tomar</span>
+        <div class="ff-bar" style="width:calc(1/23 * 160px)"></div><span class="ff-cnt">1</span></div>
+      <div style="margin-top:8px;font-size:10px;color:var(--red);">
+        ⚠ 42 of 81 threads (52%) had <strong>no firefighter response</strong>
+      </div>
+      <div style="margin-top:4px;font-size:10px;color:var(--mid);">
+        Srikant Chonnad handled 59% of all firefighter responses
+      </div>
+    </div>
+
+    <!-- Response Time -->
+    <div>
+      <div class="sec-label">▸ RESPONSE TIME</div>
+      <div class="rt-card">
+        <div class="rt-lbl">Fastest</div>
+        <div class="rt-val" style="color:var(--green)">6.8 min</div>
+        <div style="font-size:10px;color:var(--mid);">Ramakrishna</div>
+      </div>
+      <div class="rt-card">
+        <div class="rt-lbl">Median</div>
+        <div class="rt-val" style="color:var(--blue)">10.2h</div>
+      </div>
+      <div class="rt-card">
+        <div class="rt-lbl">Average</div>
+        <div class="rt-val" style="color:var(--amber)">20.7h</div>
+      </div>
+      <div class="rt-card">
+        <div class="rt-lbl">Slowest</div>
+        <div class="rt-val" style="color:var(--red)">83.5h</div>
+        <div style="font-size:10px;color:var(--mid);">Srikant Chonnad</div>
+      </div>
+      <div class="rt-card" style="background:#FEE2E2;">
+        <div class="rt-lbl" style="color:var(--red)">No Reply</div>
+        <div class="rt-val" style="color:var(--red)">42</div>
+        <div style="font-size:10px;color:var(--red);">52% of threads</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="gus-banner">
+    🔍 <strong>GUS Investigations this week (5):</strong> &nbsp;
+    W-23552985 &nbsp;|&nbsp; W-22954128 &nbsp;|&nbsp; W-23886339 &nbsp;|&nbsp; W-21321687 &nbsp;|&nbsp; W-23644487
+  </div>
+
+  <div class="slide-footer">CONFIDENTIAL &nbsp;|&nbsp; LSC P&amp;T Support &nbsp;|&nbsp; EMEA &amp; IST &nbsp;|&nbsp; Aug 9–15, 2026</div>
+</div>
+
+</body>
+</html>
