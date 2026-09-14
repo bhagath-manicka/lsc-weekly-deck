@@ -265,7 +265,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div class="card card-blue">
         <div class="card-icon">✅</div>
         <div class="card-title">This Week Priorities</div>
-        <div class="card-body"><ol style='margin:0;padding-left:16px;'><li>Triage <b>34 P1 Critical</b> cases — assign owners today</li><li>Deloitte &amp; Takeda account syncs with dedicated engineers</li><li>Target <b>25% closure rate</b> by EoW — close or escalate 108 open cases</li><li>Confirm APAC zero-case anomaly with regional leads</li><li>Review <b>14 open GUS items</b> (see Slide 3) — assign owners &amp; ETAs</li></ol></div>
+        <div class="card-body"><ol style='margin:0;padding-left:16px;'><li>Triage <b>34 P1 Critical</b> cases — assign owners today</li><li>Deloitte &amp; Takeda account syncs with dedicated engineers</li><li>Target <b>25% closure rate</b> by EoW — close or escalate 108 open cases</li><li>Confirm APAC zero-case anomaly with regional leads</li><li>Review <b>14 GUS items</b> on Slide 3 — 10 open, 3 closed but no fix build confirmed</li></ol></div>
       </div></div>
   </div>
 </div>
@@ -273,72 +273,90 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <div class="slide" id="slide3">
   <div class="slide-header">
     <div>
-      <div class="slide-title">GUS Investigations — Active &amp; Surfaced This Week</div>
+      <div class="slide-title">GUS Investigations — Referenced in Support Threads This Week</div>
       <div class="slide-sub">Sep 7 – 13, 2026 &nbsp;·&nbsp; LSC Life Sciences Engineering</div>
     </div>
     <div class="badge">Confidential</div>
   </div>
   <div class="slide-body">
     <div class="kpi-row">
-      <div class="kpi kpi-ist"><div class="kv">14</div><div class="kl">Total GUS Items</div></div>
-      <div class="kpi" style="border-top-color:#F59E0B;"><div class="kv" style="color:#F59E0B;">—</div><div class="kl">Created This Week</div></div>
-      <div class="kpi" style="border-top-color:#22C55E;"><div class="kv" style="color:#22C55E;">—</div><div class="kl">Closed This Week</div></div>
-      <div class="kpi" style="border-top-color:#EF4444;"><div class="kv" style="color:#EF4444;">—</div><div class="kl">Avg Age (days)</div></div>
-      <div class="kpi" style="border-top-color:#EF4444;"><div class="kv" style="color:#EF4444;">2</div><div class="kl">Est. P1 Items</div></div>
-      <div class="kpi" style="border-top-color:#F59E0B;"><div class="kv" style="color:#F59E0B;">4</div><div class="kl">Est. P2 Items</div></div>
+      <div class="kpi kpi-ist"><div class="kv">14</div><div class="kl">Total Referenced</div></div>
+      <div class="kpi" style="border-top-color:#EF4444;"><div class="kv" style="color:#EF4444;">10</div><div class="kl">Open / Active</div></div>
+      <div class="kpi" style="border-top-color:#F59E0B;"><div class="kv" style="color:#F59E0B;">3</div><div class="kl">Closed – No Fix Build</div></div>
+      <div class="kpi" style="border-top-color:#22C55E;"><div class="kv" style="color:#22C55E;">1</div><div class="kl">Closed – Fix Available</div></div>
+      <div class="kpi" style="border-top-color:#EF4444;"><div class="kv" style="color:#EF4444;">8</div><div class="kl">Items &gt;30 Days Old</div></div>
+      <div class="kpi" style="border-top-color:#7F1D1D;"><div class="kv" style="color:#7F1D1D;">2</div><div class="kl">Items &gt;90 Days Old</div></div>
     </div>
 
     <div class="two-col" style="margin-top:14px;gap:14px;">
       <div style="flex:1.3;display:flex;flex-direction:column;gap:12px;">
+
         <div class="panel">
-          <div class="pt">Open GUS W-Numbers — Active This Week</div>
-          <div style="font-size:10px;color:#6B7280;margin:4px 0 10px;">14 items surfaced in LSC engineering discussions</div>
-          <div style="display:flex;flex-wrap:wrap;gap:7px;"><span class="gus-pill">W-18537765</span> <span class="gus-pill">W-18537818</span> <span class="gus-pill">W-21669060</span> <span class="gus-pill">W-21685377</span> <span class="gus-pill">W-22142880</span> <span class="gus-pill">W-22506519</span> <span class="gus-pill">W-22747372</span> <span class="gus-pill">W-22775467</span> <span class="gus-pill">W-23171463</span> <span class="gus-pill">W-23609259</span> <span class="gus-pill">W-23764386</span> <span class="gus-pill">W-23902711</span> <span class="gus-pill">W-23954745</span> <span class="gus-pill">W-24123796</span></div>
-          <div style="margin-top:12px;padding:10px;background:#EFF6FF;border-radius:6px;border-left:3px solid #00A1E0;">
-            <div style="font-size:11px;font-weight:700;color:#032D60;">Action Required</div>
-            <div style="font-size:11px;color:#1E40AF;margin-top:3px;line-height:1.6;">
-              Review all 14 items in GUS for current status, owner assignment, and updated ETA.
-              Items linked to P1/P2 support cases should be flagged to engineering leads immediately.
-            </div>
+          <div class="pt" style="color:#EF4444;">Open / Active — 10 items</div>
+          <div style="font-size:10px;color:#6B7280;margin:4px 0 8px;">Bug is open in GUS; customer impact ongoing</div>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;"><span style="background:#EF4444;color:#FFFFFF;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:.03em;display:inline-block;">W-18537765</span> <span style="background:#EF4444;color:#FFFFFF;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:.03em;display:inline-block;">W-18537818</span> <span style="background:#EF4444;color:#FFFFFF;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:.03em;display:inline-block;">W-21685377</span> <span style="background:#EF4444;color:#FFFFFF;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:.03em;display:inline-block;">W-22747372</span> <span style="background:#EF4444;color:#FFFFFF;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:.03em;display:inline-block;">W-22775467</span> <span style="background:#EF4444;color:#FFFFFF;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:.03em;display:inline-block;">W-23171463</span> <span style="background:#EF4444;color:#FFFFFF;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:.03em;display:inline-block;">W-23609259</span> <span style="background:#EF4444;color:#FFFFFF;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:.03em;display:inline-block;">W-23764386</span> <span style="background:#EF4444;color:#FFFFFF;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:.03em;display:inline-block;">W-23902711</span> <span style="background:#EF4444;color:#FFFFFF;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:.03em;display:inline-block;">W-23954745</span></div>
+        </div>
+
+        <div class="panel">
+          <div class="pt" style="color:#F59E0B;">Closed in GUS — No Confirmed Fix Build — 3 items</div>
+          <div style="font-size:10px;color:#6B7280;margin:4px 0 8px;">Marked closed but customers not yet on a build with the fix — still causing active cases</div>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;"><span style="background:#F59E0B;color:#111827;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:.03em;display:inline-block;">W-21669060</span> <span style="background:#F59E0B;color:#111827;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:.03em;display:inline-block;">W-22142880</span> <span style="background:#F59E0B;color:#111827;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:.03em;display:inline-block;">W-22506519</span></div>
+          <div style="margin-top:8px;padding:8px 10px;background:#FFFBEB;border-radius:5px;border-left:3px solid #F59E0B;font-size:10px;color:#92400E;line-height:1.6;">
+            W-21669060: VisitHolidayValidationHandler — closed at build 262.1; customer on 262.9 still hits it.<br>
+            W-22142880 / W-22506519: iPad error 400 metadata sync — closed; no confirmed fixed package announced.
           </div>
         </div>
 
         <div class="panel">
-          <div class="pt">Estimated Age Distribution</div>
+          <div class="pt" style="color:#22C55E;">Closed — Fix Available — 1 item</div>
+          <div style="font-size:10px;color:#6B7280;margin:4px 0 8px;">Resolved; customers should upgrade to confirmed build</div>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;"><span style="background:#22C55E;color:#FFFFFF;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:.03em;display:inline-block;">W-24123796</span></div>
+        </div>
+
+        <div style="padding:10px;background:#EFF6FF;border-radius:6px;border-left:3px solid #00A1E0;">
+          <div style="font-size:11px;font-weight:700;color:#032D60;">Action Required</div>
+          <div style="font-size:11px;color:#1E40AF;margin-top:3px;line-height:1.6;">
+            For <b>Closed – No Fix Build</b> items: confirm fixed package version with engineering and communicate to affected customers.
+            For <b>Open</b> items: assign owner &amp; ETA; P1/P2-linked items escalate immediately.
+          </div>
+        </div>
+      </div>
+
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px;">
+        <div class="panel">
+          <div class="pt">Age Distribution (from first Slack mention)</div>
           <div style="margin-top:8px;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
         <div style="width:52px;font-size:11px;color:#374151;">0–7d</div>
         <div style="flex:1;background:#E2E8F0;border-radius:3px;overflow:hidden;">
-          <div style="height:16px;width:40%;background:#22C55E;border-radius:3px;"></div>
+          <div style="height:16px;width:50%;background:#22C55E;border-radius:3px;"></div>
         </div>
-        <div style="width:20px;font-size:11px;font-weight:700;text-align:right;">2</div>
+        <div style="width:20px;font-size:11px;font-weight:700;text-align:right;">3</div>
       </div>
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
         <div style="width:52px;font-size:11px;color:#374151;">8–30d</div>
         <div style="flex:1;background:#E2E8F0;border-radius:3px;overflow:hidden;">
-          <div style="height:16px;width:80%;background:#F59E0B;border-radius:3px;"></div>
+          <div style="height:16px;width:50%;background:#F59E0B;border-radius:3px;"></div>
         </div>
-        <div style="width:20px;font-size:11px;font-weight:700;text-align:right;">4</div>
+        <div style="width:20px;font-size:11px;font-weight:700;text-align:right;">3</div>
       </div>
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
         <div style="width:52px;font-size:11px;color:#374151;">31–90d</div>
         <div style="flex:1;background:#E2E8F0;border-radius:3px;overflow:hidden;">
           <div style="height:16px;width:100%;background:#EF4444;border-radius:3px;"></div>
         </div>
-        <div style="width:20px;font-size:11px;font-weight:700;text-align:right;">5</div>
+        <div style="width:20px;font-size:11px;font-weight:700;text-align:right;">6</div>
       </div>
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
-        <div style="width:52px;font-size:11px;color:#374151;">90+d</div>
+        <div style="width:52px;font-size:11px;color:#374151;">90+ d</div>
         <div style="flex:1;background:#E2E8F0;border-radius:3px;overflow:hidden;">
-          <div style="height:16px;width:60%;background:#7F1D1D;border-radius:3px;"></div>
+          <div style="height:16px;width:33%;background:#7F1D1D;border-radius:3px;"></div>
         </div>
-        <div style="width:20px;font-size:11px;font-weight:700;text-align:right;">3</div>
+        <div style="width:20px;font-size:11px;font-weight:700;text-align:right;">2</div>
       </div></div>
-          <div style="margin-top:8px;font-size:10px;color:#9CA3AF;">Estimated from W-number recency; verify against GUS directly.</div>
+          <div style="margin-top:6px;font-size:10px;color:#9CA3AF;">Based on earliest #ask-lsc-engineering thread date; verify against GUS Created Date.</div>
         </div>
-      </div>
 
-      <div style="flex:1;display:flex;flex-direction:column;gap:12px;">
         <div class="panel" style="flex:1;">
           <div class="pt">GUS by Geo (Estimated)</div>
           <div style="margin-top:10px;">
@@ -358,40 +376,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
             </div>
             <div style="display:flex;align-items:center;gap:8px;">
               <div style="width:42px;font-size:11px;font-weight:700;color:#F97316;">APAC</div>
-              <div style="flex:1;"><div style="width:4px;height:16px;background:#E2E8F0;border-radius:3px;"></div></div>
+              <div style="flex:1;background:#E2E8F0;border-radius:3px;overflow:hidden;">
+                <div style="height:16px;width:7%;background:#F97316;border-radius:3px;"></div>
+              </div>
               <div style="width:26px;font-size:11px;">1</div>
             </div>
           </div>
-          <div style="margin-top:8px;font-size:10px;color:#9CA3AF;">Estimates based on associated case geography.</div>
-        </div>
-
-        <div class="panel" style="flex:1;">
-          <div class="pt">Status Breakdown (Estimated)</div>
-          <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
-            <div style="padding:10px;background:#FEF2F2;border-radius:8px;">
-              <div style="font-size:20px;font-weight:800;color:#EF4444;">6</div>
-              <div style="font-size:10px;color:#6B7280;margin-top:2px;">Open</div>
-            </div>
-            <div style="padding:10px;background:#FFFBEB;border-radius:8px;">
-              <div style="font-size:20px;font-weight:800;color:#F59E0B;">5</div>
-              <div style="font-size:10px;color:#6B7280;margin-top:2px;">In Progress</div>
-            </div>
-            <div style="padding:10px;background:#F0FDF4;border-radius:8px;">
-              <div style="font-size:20px;font-weight:800;color:#22C55E;">3</div>
-              <div style="font-size:10px;color:#6B7280;margin-top:2px;">Fixed/Closed</div>
-            </div>
-          </div>
-          <div style="margin-top:8px;font-size:10px;color:#9CA3AF;">Verify current status in GUS portal for each W-number.</div>
+          <div style="margin-top:8px;font-size:10px;color:#9CA3AF;">Based on associated case geography.</div>
         </div>
 
         <div class="panel">
           <div class="pt">Recommended Actions</div>
           <div style="font-size:11px;color:#374151;margin-top:8px;line-height:1.7;">
             <ul style="margin:0;padding-left:16px;">
-              <li>Assign owner to every <b>Open</b> GUS item</li>
-              <li>Escalate <b>90+d items</b> to engineering leads</li>
-              <li>Link each W-number to the associated P1/P2 case</li>
-              <li>Include GUS status in next week's executive update</li>
+              <li>Confirm fixed build for <b>W-21669060, W-22142880, W-22506519</b> — communicate to customers</li>
+              <li>Assign owner &amp; ETA to all <b>10 Open</b> items</li>
+              <li>Escalate <b>2 items &gt;90 days</b> (W-18537765, W-18537818) to engineering leads</li>
+              <li>Link each W-number to its associated P1/P2 case in OrgCS</li>
             </ul>
           </div>
         </div>
