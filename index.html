@@ -1,875 +1,415 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LSC Weekly Executive Report — Sep 6–12, 2026</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>LSC Weekly Executive Dashboard | Sep 7 – 13, 2026</title>
 <style>
-  :root {
-    --navy: #032D60; --blue: #00A1E0; --teal: #00698A; --purple: #8B5CF6;
-    --orange: #F97316;
-    --light-bg: #F4F6F9; --white: #FFFFFF; --dark: #1A1A2E; --mid: #6B7280;
-    --green: #059669; --amber: #D97706; --red: #DC2626; --gold: #CA8A04;
-    --card-border: #E5E7EB;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', Arial, sans-serif; background: #EEF2F7; color: var(--dark); }
-
-  .slide { width: 960px; margin: 24px auto; background: white; border-radius: 8px;
-           box-shadow: 0 4px 20px rgba(0,0,0,.15); overflow: hidden; }
-
-  .slide-header { background: var(--navy); padding: 14px 20px 10px; position: relative; }
-  .slide-header::after { content:''; display:block; height:4px; background:var(--blue);
-                          margin-top:10px; margin-left:-20px; width:calc(100% + 40px); }
-  .slide-header h1 { color:white; font-size:20px; font-weight:700; }
-  .slide-header .week-badge { float:right; background:rgba(255,255,255,.12);
-    color:#B0C4DE; font-size:11px; padding:4px 10px; border-radius:12px; margin-top:2px; }
-
-  .slide-footer { background:var(--navy); color:#B0C4DE; font-size:10px;
-                  text-align:center; padding:6px; }
-
-  .kpi-strip { display:flex; }
-  .kpi { flex:1; padding:10px 8px; text-align:center; }
-  .kpi:nth-child(odd)  { background:var(--navy); }
-  .kpi:nth-child(even) { background:#05428A; }
-  .kpi .val { font-size:26px; font-weight:700; color:var(--blue); line-height:1.1; }
-  .kpi .lbl { font-size:10px; color:#B0C4DE; margin-top:3px; }
-
-  .sec-label { background:var(--navy); color:var(--blue); font-size:11px;
-               font-weight:700; padding:4px 10px; margin-bottom:6px; border-radius:2px; }
-
-  .s1-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; padding:12px 16px; }
-  .s1-panel { background:var(--light-bg); border-radius:6px; padding:10px 12px; }
-
-  .bar-row { display:flex; align-items:center; gap:6px; margin-bottom:5px; font-size:12px; }
-  .bar-row .label { width:130px; flex-shrink:0; font-size:11px; color:var(--dark); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .bar-wrap { flex:1; display:flex; flex-direction:column; gap:2px; }
-  .bar { height:10px; border-radius:2px; min-width:2px; }
-  .bar.teal   { background:var(--teal); }
-  .bar.purple { background:var(--purple); }
-  .bar.orange { background:var(--orange); }
-  .bar-val { font-size:10px; font-weight:700; color:var(--dark); flex-shrink:0; min-width:24px; }
-
-  .geo-block { margin-bottom:12px; }
-  .geo-name { font-weight:700; font-size:13px; margin-bottom:4px; }
-  .geo-name.teal   { color:var(--teal); }
-  .geo-name.purple { color:var(--purple); }
-  .geo-name.orange { color:var(--orange); }
-  .geo-bar-wrap { margin-bottom:3px; }
-  .geo-bar-label { font-size:10px; color:var(--mid); margin-bottom:2px; }
-  .geo-bar-track { background:#E5E7EB; border-radius:3px; height:12px; }
-  .geo-bar-fill { height:12px; border-radius:3px; }
-
-  .trend-wrap { padding:10px 16px 12px; }
-  .trend-bars { display:flex; align-items:flex-end; gap:3px; height:60px; }
-
-  .cards-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:12px 16px; }
-  .card { border-radius:6px; overflow:hidden; background:var(--light-bg); }
-  .card-accent { height:4px; }
-  .card-body { padding:10px 12px; }
-  .card-title { font-weight:700; font-size:13px; margin-bottom:6px; }
-  .card ul { list-style:none; padding:0; }
-  .card li { font-size:11px; color:var(--dark); padding:2px 0; padding-left:14px; position:relative; }
-  .card li::before { content:'•'; position:absolute; left:2px; color:var(--mid); }
-  .card-wide { grid-column:1/-1; }
-
-  /* GUS Slide */
-  .s3-grid { display:grid; grid-template-columns:2fr 1fr; gap:12px; padding:12px 16px; }
-
-  .gus-table { width:100%; border-collapse:collapse; font-size:11px; }
-  .gus-table th { background:var(--navy); color:#B0C4DE; padding:6px 8px; text-align:left; font-size:10px; font-weight:600; }
-  .gus-table td { padding:7px 8px; border-bottom:1px solid #E5E7EB; vertical-align:middle; }
-  .gus-table tr:last-child td { border-bottom:none; }
-  .gus-table tr:hover td { background:#EDF2F7; }
-
-  .status-badge { display:inline-block; padding:2px 8px; border-radius:10px; font-size:10px; font-weight:600; white-space:nowrap; }
-  .status-new      { background:#DBEAFE; color:#1D4ED8; }
-  .status-invest   { background:#FEF3C7; color:#D97706; }
-  .status-ack      { background:#E0F2FE; color:#0369A1; }
-  .status-waiting  { background:#F3F4F6; color:#6B7280; }
-  .status-moreinfo { background:#FEE2E2; color:#DC2626; }
-
-  .age-critical { color:#DC2626; font-weight:700; }
-  .age-warn     { color:#D97706; font-weight:700; }
-  .age-ok       { color:#059669; font-weight:700; }
-
-  .sb-row { display:flex; align-items:center; gap:8px; margin-bottom:7px; }
-  .sb-label { width:80px; font-size:11px; }
-  .sb-bar-track { flex:1; background:#E5E7EB; border-radius:3px; height:16px; }
-  .sb-bar-fill { height:16px; border-radius:3px; display:flex; align-items:center;
-                 padding-left:6px; font-size:10px; font-weight:700; color:white; min-width:0; }
-  .sb-count { width:24px; font-size:11px; font-weight:700; text-align:right; }
-
-  .ad-row { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
-  .ad-label { width:70px; font-size:10px; color:var(--mid); }
-  .ad-bar-track { flex:1; background:#E5E7EB; border-radius:3px; height:13px; }
-  .ad-bar-fill { height:13px; border-radius:3px; }
-  .ad-count { width:20px; font-size:11px; font-weight:700; text-align:right; }
-
-  .legend { display:flex; gap:16px; font-size:11px; color:var(--mid); margin-top:6px; }
-  .legend-dot { display:inline-block; width:12px; height:12px;
-                border-radius:2px; margin-right:4px; vertical-align:middle; }
-
-  .apac-new { background:#FFF7ED; border-left:3px solid var(--orange);
-              padding:5px 10px; font-size:10px; color:#9A3412; margin-top:6px; border-radius:2px; }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#E8ECF0;color:#111827;}
+.nav{background:#032D60;padding:12px 24px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.25);}
+.nav-brand{color:#fff;font-size:14px;font-weight:700;letter-spacing:.02em;}
+.nav-week{color:#00A1E0;font-size:12px;}
+.nav-tabs{margin-left:auto;display:flex;gap:4px;}
+.nav-tab{background:rgba(255,255,255,.12);color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:12px;cursor:pointer;transition:.15s;}
+.nav-tab:hover{background:rgba(255,255,255,.22);}
+.nav-tab.active{background:#00A1E0;}
+.deck{max-width:1100px;margin:24px auto;padding:0 16px 40px;}
+.slide{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.08);margin-bottom:28px;display:none;}
+.slide.active{display:block;}
+.slide-header{background:#032D60;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;}
+.slide-title{color:#fff;font-size:17px;font-weight:700;}
+.slide-sub{color:#00A1E0;font-size:12px;margin-top:2px;}
+.badge{background:rgba(255,255,255,.1);color:#00A1E0;font-size:10px;font-weight:600;padding:4px 10px;border-radius:20px;border:1px solid rgba(0,161,224,.4);}
+.slide-body{padding:20px 24px;}
+.kpi-row{display:flex;gap:10px;}
+.kpi{flex:1;background:#F4F6F9;border-radius:8px;padding:11px 8px;text-align:center;border-top:3px solid #B0BEC5;}
+.kv{font-size:22px;font-weight:800;color:#032D60;line-height:1;}
+.kpct{font-size:13px;font-weight:500;color:#6B7280;}
+.kl{font-size:9px;color:#6B7280;margin-top:4px;text-transform:uppercase;letter-spacing:.05em;}
+.kpi-ist{border-top-color:#00698A;}.kpi-ist .kv{color:#00698A;}
+.kpi-emea{border-top-color:#8B5CF6;}.kpi-emea .kv{color:#8B5CF6;}
+.kpi-apac{border-top-color:#F97316;}.kpi-apac .kv{color:#F97316;}
+.two-col{display:flex;}
+.panel{background:#F4F6F9;border-radius:8px;padding:12px 14px;}
+.pt{font-size:10px;font-weight:700;color:#032D60;text-transform:uppercase;letter-spacing:.07em;border-bottom:1px solid #E2E8F0;padding-bottom:5px;margin-bottom:2px;}
+.cards-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+.card{border-radius:10px;padding:14px;border-top:4px solid #E2E8F0;}
+.card-icon{font-size:20px;margin-bottom:5px;}
+.card-title{font-size:13px;font-weight:700;color:#032D60;margin-bottom:6px;}
+.card-body{font-size:11px;color:#374151;line-height:1.6;}
+.card-red{background:#FEF2F2;border-top-color:#EF4444;}
+.card-amber{background:#FFFBEB;border-top-color:#F59E0B;}
+.card-ist{background:#F0F9FF;border-top-color:#00698A;}
+.card-emea{background:#F5F3FF;border-top-color:#8B5CF6;}
+.card-gray{background:#F4F6F9;border-top-color:#B0BEC5;}
+.card-apac{background:#FFF7ED;border-top-color:#F97316;}
+.card-blue{background:#EFF6FF;border-top-color:#00A1E0;}
+.gus-pill{background:#032D60;color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:.03em;display:inline-block;}
+.footer{text-align:center;font-size:10px;color:#9CA3AF;padding:12px 0;}
 </style>
 </head>
 <body>
-
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- SLIDE 1 — EXECUTIVE DASHBOARD                             -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<div class="slide">
+<nav class="nav">
+  <div>
+    <div class="nav-brand">LSC P&amp;T Support — Weekly Executive Dashboard</div>
+    <div class="nav-week">Sep 7 – 13, 2026 &nbsp;·&nbsp; EMEA &amp; IST Regions</div>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="show(1,this)">Slide 1: Dashboard</button>
+    <button class="nav-tab" onclick="show(2,this)">Slide 2: Takeaways</button>
+    <button class="nav-tab" onclick="show(3,this)">Slide 3: GUS Items</button>
+  </div>
+</nav>
+<div class="deck">
+  
+<div class="slide" id="slide1">
   <div class="slide-header">
-    <span class="week-badge">Sep 6 – 12, 2026</span>
-    <h1>LSC Weekly Executive Dashboard</h1>
-  </div>
-
-  <div class="kpi-strip">
-    <div class="kpi"><div class="val">124</div><div class="lbl">Total Cases</div></div>
-    <div class="kpi"><div class="val">83%</div><div class="lbl">IST Share</div></div>
-    <div class="kpi"><div class="val">16%</div><div class="lbl">EMEA Share</div></div>
-    <div class="kpi"><div class="val">1%</div><div class="lbl">APAC Share</div></div>
-    <div class="kpi"><div class="val">14.5%</div><div class="lbl">Closure Rate</div></div>
-    <div class="kpi"><div class="val">33</div><div class="lbl">P1 Critical</div></div>
-    <div class="kpi"><div class="val">9</div><div class="lbl">P2 High</div></div>
-  </div>
-
-  <div class="s1-grid">
-
-    <!-- Top Accounts -->
-    <div class="s1-panel">
-      <div class="sec-label">▸ TOP ACCOUNTS BY CASE VOLUME</div>
-      <div class="bar-row"><span class="label">Deloitte Global</span>
-        <div class="bar-wrap"><div class="bar teal" style="width:100%"></div></div><span class="bar-val">17</span></div>
-      <div class="bar-row"><span class="label">Takeda Pharma</span>
-        <div class="bar-wrap"><div class="bar teal" style="width:94%"></div></div><span class="bar-val">16</span></div>
-      <div class="bar-row"><span class="label">Pfizer EMEA</span>
-        <div class="bar-wrap"><div class="bar teal" style="width:76%"></div></div><span class="bar-val">13</span></div>
-      <div class="bar-row"><span class="label">AstraZeneca</span>
-        <div class="bar-wrap"><div class="bar teal" style="width:65%"></div></div><span class="bar-val">11</span></div>
-      <div class="bar-row"><span class="label">Novartis Pharma</span>
-        <div class="bar-wrap"><div class="bar teal" style="width:65%"></div></div><span class="bar-val">11</span></div>
-      <div class="bar-row"><span class="label">Abbvie CRM</span>
-        <div class="bar-wrap"><div class="bar teal" style="width:35%"></div></div><span class="bar-val">6</span></div>
-      <div class="bar-row"><span class="label">Beiersdorf</span>
-        <div class="bar-wrap">
-          <div class="bar teal" style="width:29%"></div>
-          <div class="bar orange" style="width:6%"></div>
-        </div><span class="bar-val">6</span></div>
-      <div class="bar-row"><span class="label">Alfasigma Global</span>
-        <div class="bar-wrap"><div class="bar teal" style="width:29%"></div></div><span class="bar-val">5</span></div>
-      <div class="bar-row"><span class="label">FIDIA Farmaceutici</span>
-        <div class="bar-wrap"><div class="bar purple" style="width:24%"></div></div><span class="bar-val">4</span></div>
-      <div class="bar-row"><span class="label">MEDICE GmbH</span>
-        <div class="bar-wrap"><div class="bar purple" style="width:24%"></div></div><span class="bar-val">4</span></div>
-      <div class="legend">
-        <span><span class="legend-dot" style="background:var(--teal)"></span>IST</span>
-        <span><span class="legend-dot" style="background:var(--purple)"></span>EMEA</span>
-        <span><span class="legend-dot" style="background:var(--orange)"></span>APAC</span>
-      </div>
-    </div>
-
-    <!-- Severity by Geo -->
-    <div class="s1-panel">
-      <div class="sec-label">▸ SEVERITY BY GEO</div>
-      <div class="bar-row" style="margin-bottom:10px;">
-        <span class="label" style="font-size:12px;font-weight:700;color:var(--red)">P1 Critical</span>
-        <div class="bar-wrap">
-          <div class="bar teal" style="width:97%"></div>
-          <div class="bar purple" style="width:3%"></div>
-        </div><span class="bar-val" style="color:var(--red)">33</span>
-      </div>
-      <div class="bar-row" style="margin-bottom:10px;">
-        <span class="label" style="font-size:12px;font-weight:700;color:var(--amber)">P2 High</span>
-        <div class="bar-wrap">
-          <div class="bar teal" style="width:100%"></div>
-        </div><span class="bar-val" style="color:var(--amber)">9</span>
-      </div>
-      <div class="bar-row" style="margin-bottom:10px;">
-        <span class="label" style="font-size:12px;font-weight:700;color:var(--teal)">P3 Medium</span>
-        <div class="bar-wrap">
-          <div class="bar teal" style="width:78%"></div>
-          <div class="bar purple" style="width:17%"></div>
-          <div class="bar orange" style="width:4%"></div>
-        </div><span class="bar-val">23</span>
-      </div>
-      <div class="bar-row">
-        <span class="label" style="font-size:12px;font-weight:700;color:var(--mid)">P4 Low</span>
-        <div class="bar-wrap">
-          <div class="bar teal" style="width:77%"></div>
-          <div class="bar purple" style="width:23%"></div>
-        </div><span class="bar-val">52</span>
-      </div>
-      <div class="legend" style="margin-top:12px;">
-        <span><span class="legend-dot" style="background:var(--teal)"></span>IST</span>
-        <span><span class="legend-dot" style="background:var(--purple)"></span>EMEA</span>
-        <span><span class="legend-dot" style="background:var(--orange)"></span>APAC</span>
-      </div>
-      <div style="margin-top:10px;font-size:10px;color:var(--mid);">
-        <b>Note:</b> P-level from internal score: 0→P1 · 13-16→P2 · 26-31→P3 · 45-70→P4
-      </div>
-    </div>
-
-    <!-- Geo Split & Closure -->
-    <div class="s1-panel">
-      <div class="sec-label">▸ GEO SPLIT &amp; CLOSURE</div>
-      <div class="geo-block">
-        <div class="geo-name teal">IST</div>
-        <div class="geo-bar-wrap">
-          <div class="geo-bar-label">103 cases (83%)</div>
-          <div class="geo-bar-track"><div class="geo-bar-fill" style="width:100%;background:var(--teal)"></div></div>
-        </div>
-        <div class="geo-bar-wrap" style="margin-top:4px;">
-          <div class="geo-bar-label">Closure: 14.6% (15 closed)</div>
-          <div class="geo-bar-track"><div class="geo-bar-fill" style="width:14.6%;background:#004F69"></div></div>
-        </div>
-      </div>
-      <div class="geo-block">
-        <div class="geo-name purple">EMEA</div>
-        <div class="geo-bar-wrap">
-          <div class="geo-bar-label">20 cases (16%)</div>
-          <div class="geo-bar-track"><div class="geo-bar-fill" style="width:19%;background:var(--purple)"></div></div>
-        </div>
-        <div class="geo-bar-wrap" style="margin-top:4px;">
-          <div class="geo-bar-label">Closure: 15.0% (3 closed)</div>
-          <div class="geo-bar-track"><div class="geo-bar-fill" style="width:15%;background:#6D28D9"></div></div>
-        </div>
-      </div>
-      <div class="geo-block">
-        <div class="geo-name orange">APAC</div>
-        <div class="geo-bar-wrap">
-          <div class="geo-bar-label">1 case (1%)</div>
-          <div class="geo-bar-track"><div class="geo-bar-fill" style="width:1%;background:var(--orange)"></div></div>
-        </div>
-        <div class="geo-bar-wrap" style="margin-top:4px;">
-          <div class="geo-bar-label">Closure: 0% (0 closed)</div>
-          <div class="geo-bar-track"><div class="geo-bar-fill" style="width:0%;background:#C2410C"></div></div>
-        </div>
-      </div>
-      <div class="apac-new">🆕 First APAC case tracked — Beiersdorf Shared Services</div>
-      <div style="margin-top:8px;font-size:11px;">
-        <span style="color:var(--red);font-weight:700;">▼ Closure dropped</span>
-        <span style="color:var(--mid);"> from 32.4% → 14.5% vs 4 weeks ago</span>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- 16-Week Trend -->
-  <div class="trend-wrap">
-    <div class="sec-label" style="display:inline-block;margin-bottom:8px;">▸ 16-WEEK INFLOW TREND</div>
-    <div class="trend-bars" id="trend"></div>
-    <div style="font-size:10px;color:var(--mid);margin-top:4px;text-align:right;">
-      Current week in <span style="color:var(--blue);font-weight:700;">blue</span> · all-time high in <span style="color:var(--red);font-weight:700;">red</span>
-    </div>
-  </div>
-  <script>
-    const inflow = [59,66,55,27,44,71,62,48,48,46,64,83,94,83,87,136,124];
-    const maxV = Math.max(...inflow);
-    const wrap = document.getElementById('trend');
-    inflow.forEach((v,i) => {
-      const pct = (v/maxV)*100;
-      const isLast = i===inflow.length-1;
-      const isMax = v===maxV;
-      const col = isLast ? '#00A1E0' : (isMax ? '#DC2626' : '#9CAFC4');
-      const bar = document.createElement('div');
-      bar.style.cssText = `height:${pct}%;background:${col};flex:1;border-radius:2px 2px 0 0;position:relative;`;
-      if(isLast||isMax){
-        const lbl=document.createElement('span');
-        lbl.style.cssText=`position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;color:${col};white-space:nowrap;`;
-        lbl.textContent=v;
-        bar.appendChild(lbl);
-      }
-      wrap.appendChild(bar);
-    });
-  </script>
-
-  <div class="slide-footer">CONFIDENTIAL &nbsp;|&nbsp; LSC P&amp;T Support &nbsp;|&nbsp; EMEA · IST · APAC &nbsp;|&nbsp; Sep 6–12, 2026</div>
-</div>
-
-
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- SLIDE 2 — TAKEAWAYS & ACTIONS                             -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<div class="slide">
-  <div class="slide-header">
-    <span class="week-badge">Sep 6 – 12, 2026</span>
-    <h1>Takeaways &amp; Recommended Actions</h1>
-  </div>
-
-  <div class="cards-grid">
-
-    <div class="card">
-      <div class="card-accent" style="background:#DC2626"></div>
-      <div class="card-body">
-        <div class="card-title">🔴 Backlog at Risk</div>
-        <ul>
-          <li>124 cases this week — closure rate collapsed to <strong>14.5%</strong> (was 32.4% in Aug)</li>
-          <li>Only 18 cases closed — 106 open cases carrying forward into next week</li>
-          <li>At 1.6 cases/eng/day: <strong>~16 FTEs needed</strong> to clear in one week</li>
-          <li>IST and EMEA closure rates nearly identical (14.6% vs 15%) — systemic bottleneck</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-accent" style="background:#D97706"></div>
-      <div class="card-body">
-        <div class="card-title">🟠 Account Concentration</div>
-        <ul>
-          <li>Deloitte (17) + Takeda (16) + Pfizer EMEA (13) = <strong>37% of all inflow</strong></li>
-          <li>Pfizer EMEA (13 cases) fully routed to IST — geo routing logic to review</li>
-          <li>AstraZeneca (11) + Novartis (11) both 100% IST — high single-team dependency</li>
-          <li>FIDIA (4) &amp; MEDICE (4) are pure EMEA — monitor P3/P4 aging</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-accent" style="background:#DC2626"></div>
-      <div class="card-body">
-        <div class="card-title">🔴 IST Capacity Risk</div>
-        <ul>
-          <li>103 cases (83% of volume) — 32 P1 Critical in IST queue</li>
-          <li>Closure rate at 14.6% — well below sustainable threshold</li>
-          <li>Deloitte + Takeda alone = 33 cases; need dedicated pod ownership</li>
-          <li>Raise staffing flag: 16 FTE threshold vs current capacity</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-accent" style="background:#CA8A04"></div>
-      <div class="card-body">
-        <div class="card-title">🟡 EMEA Signal</div>
-        <ul>
-          <li>20 cases — closure rate 15.0% (3/20 closed), backlog building</li>
-          <li>1 P1 Critical this week (Pfizer EMEA)</li>
-          <li>FIDIA (Italy, 4 cases) and MEDICE (4 cases) are top EMEA accounts</li>
-          <li>7 EMEA GUS investigations open — Pfizer EMEA dominates (5 of 7)</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-accent" style="background:var(--orange)"></div>
-      <div class="card-body">
-        <div class="card-title" style="color:var(--orange)">🟠 APAC Signal</div>
-        <ul>
-          <li><strong>First APAC case recorded</strong> — Beiersdorf Shared Services GmbH (P3)</li>
-          <li>1 case, 0 closed — confirm geo routing and assignee coverage</li>
-          <li>No APAC GUS investigations yet this week</li>
-          <li>Establish APAC baseline — watch for volume ramp in coming weeks</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card card-wide">
-      <div class="card-accent" style="background:var(--teal)"></div>
-      <div class="card-body">
-        <div class="card-title">📋 This Week Priorities</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-top:6px;">
-          <div style="font-size:11px;">1. Triage 32 IST P1 Critical cases — Deloitte (17) &amp; Takeda (16) queues first</div>
-          <div style="font-size:11px;">2. Closure rate at 14.5% — investigate bottleneck vs 32.4% in Aug</div>
-          <div style="font-size:11px;">3. Follow up on 7-day-old GUS items: W-24115913, W-24116598, W-24112950</div>
-          <div style="font-size:11px;">4. Review Pfizer EMEA geo routing — all 13 cases landed in IST</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <div class="slide-footer">CONFIDENTIAL &nbsp;|&nbsp; LSC P&amp;T Support &nbsp;|&nbsp; EMEA · IST · APAC &nbsp;|&nbsp; Sep 6–12, 2026</div>
-</div>
-
-
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- SLIDE 3 — GUS INVESTIGATIONS                              -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<div class="slide">
-  <div class="slide-header">
-    <span class="week-badge">Sep 6 – 12, 2026</span>
-    <h1>GUS Investigations &nbsp;|&nbsp; Weekly Analysis</h1>
-  </div>
-
-  <div class="kpi-strip">
-    <div class="kpi"><div class="val">30</div><div class="lbl">Created This Week</div></div>
-    <div class="kpi"><div class="val">21</div><div class="lbl">Open / In Progress</div></div>
-    <div class="kpi"><div class="val">9</div><div class="lbl">Closed This Week</div></div>
-    <div class="kpi"><div class="val">~5d</div><div class="lbl">Avg Age</div></div>
-    <div class="kpi"><div class="val">16</div><div class="lbl">IST GUS</div></div>
-    <div class="kpi"><div class="val">14</div><div class="lbl">EMEA GUS</div></div>
-    <div class="kpi"><div class="val">0</div><div class="lbl">APAC GUS</div></div>
-  </div>
-
-  <div class="s3-grid">
-
-    <!-- GUS Details Table — top open items needing action -->
-    <div class="s1-panel" style="overflow-x:auto;">
-      <div class="sec-label">▸ OPEN GUS — ACTION TRACKER (21 open of 30 created)</div>
-      <table class="gus-table">
-        <thead>
-          <tr>
-            <th>W-Number</th>
-            <th>Summary</th>
-            <th>Geo</th>
-            <th>Status</th>
-            <th>Age</th>
-            <th>Action Needed</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong style="color:var(--blue)">W-24115913</strong></td>
-            <td>Pfizer EMEA — Recommended Actions iPad shows IDs not Names</td>
-            <td><span style="color:var(--purple);font-weight:700;">EMEA</span></td>
-            <td><span class="status-badge status-invest">Investigating</span></td>
-            <td><span class="age-critical">7d</span></td>
-            <td style="font-size:10px;color:#DC2626;font-weight:700;">🔴 No update in 7d — escalate</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--blue)">W-24116598</strong></td>
-            <td>Takeda — LSC Email not created for Remote Visit invite</td>
-            <td><span style="color:var(--teal);font-weight:700;">IST</span></td>
-            <td><span class="status-badge status-waiting">Waiting on Cust.</span></td>
-            <td><span class="age-critical">7d</span></td>
-            <td style="font-size:10px;color:#DC2626;font-weight:700;">🔴 Follow up with customer</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--blue)">W-24112950</strong></td>
-            <td>Deloitte — Remote Engagement Invite response not notified</td>
-            <td><span style="color:var(--teal);font-weight:700;">IST</span></td>
-            <td><span class="status-badge status-waiting">Waiting on Cust.</span></td>
-            <td><span class="age-critical">7d</span></td>
-            <td style="font-size:10px;color:#DC2626;font-weight:700;">🔴 Follow up with customer</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--blue)">W-24148564</strong></td>
-            <td>Deloitte — Provider Territory Job reporting failures</td>
-            <td><span style="color:var(--teal);font-weight:700;">IST</span></td>
-            <td><span class="status-badge status-invest">Investigating</span></td>
-            <td><span class="age-warn">4d</span></td>
-            <td style="font-size:10px;color:#D97706;">🟠 Eng review — no update 2d</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--blue)">W-24143821</strong></td>
-            <td>Pfizer EMEA — Calendar record type mismatch web vs iPad</td>
-            <td><span style="color:var(--purple);font-weight:700;">EMEA</span></td>
-            <td><span class="status-badge status-ack">Acknowledged</span></td>
-            <td><span class="age-warn">5d</span></td>
-            <td style="font-size:10px;color:#D97706;">🟠 Assign engineer</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--blue)">W-24138568</strong></td>
-            <td>AstraZeneca — Activity Timeline filter values limited</td>
-            <td><span style="color:var(--teal);font-weight:700;">IST</span></td>
-            <td><span class="status-badge status-invest">Investigating</span></td>
-            <td><span class="age-warn">5d</span></td>
-            <td style="font-size:10px;color:#D97706;">🟠 Pending eng analysis</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--blue)">W-24162010</strong></td>
-            <td>Takeda — Cancellation email not triggered after visit deleted</td>
-            <td><span style="color:var(--teal);font-weight:700;">IST</span></td>
-            <td><span class="status-badge status-invest">Investigating</span></td>
-            <td><span class="age-ok">3d</span></td>
-            <td style="font-size:10px;color:#059669;">🟢 In progress</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--blue)">W-24165983</strong></td>
-            <td>Takeda (Hypercare) — Visitor section discrepancy iPad</td>
-            <td><span style="color:var(--teal);font-weight:700;">IST</span></td>
-            <td><span class="status-badge status-invest">Investigating</span></td>
-            <td><span class="age-ok">3d</span></td>
-            <td style="font-size:10px;color:#059669;">🟢 Hypercare — monitor</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--blue)">W-24167537</strong></td>
-            <td>Genmab — Greyed-out success toast on update fragments</td>
-            <td><span style="color:var(--teal);font-weight:700;">IST</span></td>
-            <td><span class="status-badge status-invest">Investigating</span></td>
-            <td><span class="age-ok">3d</span></td>
-            <td style="font-size:10px;color:#059669;">🟢 In progress</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--blue)">W-24163298</strong></td>
-            <td>Pfizer EMEA — Smart Content Search not indexing videos</td>
-            <td><span style="color:var(--purple);font-weight:700;">EMEA</span></td>
-            <td><span class="status-badge status-ack">Acknowledged</span></td>
-            <td><span class="age-ok">3d</span></td>
-            <td style="font-size:10px;color:#059669;">🟢 Being reviewed</td>
-          </tr>
-        </tbody>
-      </table>
-      <div style="margin-top:6px;font-size:10px;color:var(--mid);">Showing 10 of 21 open items · 9 closed this week (3 New Bug, 3 No Fix–FR, 2 Doc, 1 Known Bug)</div>
-    </div>
-
-    <!-- Right panel -->
     <div>
+      <div class="slide-title">LSC P&amp;T Support — Weekly Executive Dashboard</div>
+      <div class="slide-sub">Sep 7 – 13, 2026 &nbsp;·&nbsp; EMEA &amp; IST Regions</div>
+    </div>
+    <div class="badge">Confidential</div>
+  </div>
+  <div class="slide-body">
+    <div class="kpi-row">
+      <div class="kpi"><div class="kv" style="color:#032D60;">126</div><div class="kl">Total Cases</div></div>
+      <div class="kpi kpi-ist"><div class="kv">82<span class="kpct">(65%)</span></div><div class="kl">IST Cases</div></div>
+      <div class="kpi kpi-emea"><div class="kv">20<span class="kpct">(16%)</span></div><div class="kl">EMEA Cases</div></div>
+      <div class="kpi kpi-apac"><div class="kv">24<span class="kpct">(19%)</span></div><div class="kl">APAC Cases</div></div>
+      <div class="kpi" style="border-top-color:#22C55E;"><div class="kv" style="color:#22C55E;">14.3%</div><div class="kl">Closure Rate</div></div>
+      <div class="kpi" style="border-top-color:#F59E0B;"><div class="kv" style="color:#F59E0B;">9</div><div class="kl">P2 High</div></div>
+      <div class="kpi" style="border-top-color:#EF4444;"><div class="kv" style="color:#EF4444;">34</div><div class="kl">P1 Critical</div></div>
+    </div>
 
-      <div class="s1-panel" style="margin-bottom:12px;">
-        <div class="sec-label">▸ STATUS BREAKDOWN</div>
-        <div class="sb-row">
-          <span class="sb-label" style="color:var(--amber);font-weight:600;">Investigating</span>
-          <div class="sb-bar-track"><div class="sb-bar-fill" style="width:57%;background:#D97706;">7</div></div>
-          <span class="sb-count">7</span>
-        </div>
-        <div class="sb-row">
-          <span class="sb-label" style="color:#6B7280;font-weight:600;">Waiting</span>
-          <div class="sb-bar-track"><div class="sb-bar-fill" style="width:40%;background:#6B7280;">5</div></div>
-          <span class="sb-count">5</span>
-        </div>
-        <div class="sb-row">
-          <span class="sb-label" style="color:#1D4ED8;font-weight:600;">New</span>
-          <div class="sb-bar-track"><div class="sb-bar-fill" style="width:32%;background:#1D4ED8;">4</div></div>
-          <span class="sb-count">4</span>
-        </div>
-        <div class="sb-row">
-          <span class="sb-label" style="color:#0369A1;font-weight:600;">Acknowledged</span>
-          <div class="sb-bar-track"><div class="sb-bar-fill" style="width:32%;background:#0369A1;">4</div></div>
-          <span class="sb-count">4</span>
-        </div>
-        <div class="sb-row">
-          <span class="sb-label" style="color:var(--red);font-weight:600;">More Info</span>
-          <div class="sb-bar-track"><div class="sb-bar-fill" style="width:8%;background:#DC2626;min-width:16px;">1</div></div>
-          <span class="sb-count">1</span>
-        </div>
-        <div class="sb-row">
-          <span class="sb-label" style="color:var(--green);font-weight:600;">Closed</span>
-          <div class="sb-bar-track"><div class="sb-bar-fill" style="width:73%;background:#059669;">9</div></div>
-          <span class="sb-count">9</span>
+    <div class="two-col" style="margin-top:14px;gap:14px;">
+      <div class="panel" style="flex:1.3;">
+        <div class="pt">Top Accounts by Inflow</div>
+        <div style="margin-top:8px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+        <div style="width:148px;font-size:11px;color:#374151;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Deloitte Global">Deloitte Global</div>
+        <div style="flex:1;"><div style="display:flex;align-items:center;border-radius:3px;overflow:hidden;"><div style="display:inline-block;width:76.5%;height:16px;background:#00698A;"></div><div style="display:inline-block;width:23.5%;height:16px;background:#F97316;"></div></div></div>
+        <div style="width:26px;font-size:11px;font-weight:700;text-align:right;">17</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+        <div style="width:148px;font-size:11px;color:#374151;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Takeda Pharmaceuticals">Takeda Pharmaceuticals</div>
+        <div style="flex:1;"><div style="display:flex;align-items:center;border-radius:3px;overflow:hidden;"><div style="display:inline-block;width:82.4%;height:16px;background:#00698A;"></div></div></div>
+        <div style="width:26px;font-size:11px;font-weight:700;text-align:right;">14</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+        <div style="width:148px;font-size:11px;color:#374151;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Pfizer – LSC EMEA">Pfizer – LSC EMEA</div>
+        <div style="flex:1;"><div style="display:flex;align-items:center;border-radius:3px;overflow:hidden;"><div style="display:inline-block;width:70.6%;height:16px;background:#00698A;"></div></div></div>
+        <div style="width:26px;font-size:11px;font-weight:700;text-align:right;">12</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+        <div style="width:148px;font-size:11px;color:#374151;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="AstraZeneca">AstraZeneca</div>
+        <div style="flex:1;"><div style="display:flex;align-items:center;border-radius:3px;overflow:hidden;"><div style="display:inline-block;width:58.8%;height:16px;background:#00698A;"></div><div style="display:inline-block;width:5.9%;height:16px;background:#F97316;"></div></div></div>
+        <div style="width:26px;font-size:11px;font-weight:700;text-align:right;">11</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+        <div style="width:148px;font-size:11px;color:#374151;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Novartis Pharma">Novartis Pharma</div>
+        <div style="flex:1;"><div style="display:flex;align-items:center;border-radius:3px;overflow:hidden;"><div style="display:inline-block;width:47.1%;height:16px;background:#00698A;"></div><div style="display:inline-block;width:17.6%;height:16px;background:#F97316;"></div></div></div>
+        <div style="width:26px;font-size:11px;font-weight:700;text-align:right;">11</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+        <div style="width:148px;font-size:11px;color:#374151;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Abbvie CRM Main">Abbvie CRM Main</div>
+        <div style="flex:1;"><div style="display:flex;align-items:center;border-radius:3px;overflow:hidden;"><div style="display:inline-block;width:23.5%;height:16px;background:#00698A;"></div><div style="display:inline-block;width:11.8%;height:16px;background:#F97316;"></div></div></div>
+        <div style="width:26px;font-size:11px;font-weight:700;text-align:right;">6</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+        <div style="width:148px;font-size:11px;color:#374151;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Beiersdorf">Beiersdorf</div>
+        <div style="flex:1;"><div style="display:flex;align-items:center;border-radius:3px;overflow:hidden;"><div style="display:inline-block;width:23.5%;height:16px;background:#F97316;"></div></div></div>
+        <div style="width:26px;font-size:11px;font-weight:700;text-align:right;">4</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+        <div style="width:148px;font-size:11px;color:#374151;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="MEDICE Arzneimittel">MEDICE Arzneimittel</div>
+        <div style="flex:1;"><div style="display:flex;align-items:center;border-radius:3px;overflow:hidden;"><div style="display:inline-block;width:23.5%;height:16px;background:#8B5CF6;"></div></div></div>
+        <div style="width:26px;font-size:11px;font-weight:700;text-align:right;">4</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+        <div style="width:148px;font-size:11px;color:#374151;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Deloitte Consulting">Deloitte Consulting</div>
+        <div style="flex:1;"><div style="display:flex;align-items:center;border-radius:3px;overflow:hidden;"><div style="display:inline-block;width:23.5%;height:16px;background:#00698A;"></div></div></div>
+        <div style="width:26px;font-size:11px;font-weight:700;text-align:right;">4</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+        <div style="width:148px;font-size:11px;color:#374151;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="FIDIA Farmaceutici">FIDIA Farmaceutici</div>
+        <div style="flex:1;"><div style="display:flex;align-items:center;border-radius:3px;overflow:hidden;"><div style="display:inline-block;width:23.5%;height:16px;background:#8B5CF6;"></div></div></div>
+        <div style="width:26px;font-size:11px;font-weight:700;text-align:right;">4</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+        <div style="width:148px;font-size:11px;color:#374151;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="Alfasigma Global CRM">Alfasigma Global CRM</div>
+        <div style="flex:1;"><div style="display:flex;align-items:center;border-radius:3px;overflow:hidden;"><div style="display:inline-block;width:17.6%;height:16px;background:#00698A;"></div><div style="display:inline-block;width:5.9%;height:16px;background:#F97316;"></div></div></div>
+        <div style="width:26px;font-size:11px;font-weight:700;text-align:right;">4</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+        <div style="width:148px;font-size:11px;color:#374151;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="ZS Associates, Inc.">ZS Associates, Inc.</div>
+        <div style="flex:1;"><div style="display:flex;align-items:center;border-radius:3px;overflow:hidden;"><div style="display:inline-block;width:17.6%;height:16px;background:#00698A;"></div><div style="display:inline-block;width:5.9%;height:16px;background:#F97316;"></div></div></div>
+        <div style="width:26px;font-size:11px;font-weight:700;text-align:right;">4</div>
+      </div></div>
+        <div style="margin-top:8px;display:flex;gap:14px;font-size:10px;">
+          <span><span style="display:inline-block;width:10px;height:10px;background:#00698A;border-radius:2px;"></span> IST</span>
+          <span><span style="display:inline-block;width:10px;height:10px;background:#8B5CF6;border-radius:2px;"></span> EMEA</span>
+          <span><span style="display:inline-block;width:10px;height:10px;background:#F97316;border-radius:2px;"></span> APAC</span>
         </div>
       </div>
 
-      <div class="s1-panel" style="margin-bottom:12px;">
-        <div class="sec-label">▸ GUS BY GEO</div>
-        <div class="sb-row">
-          <span class="sb-label" style="color:var(--teal);font-weight:700;">IST</span>
-          <div class="sb-bar-track"><div class="sb-bar-fill" style="width:100%;background:var(--teal);">16</div></div>
-          <span class="sb-count">16</span>
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px;">
+        <div class="panel">
+          <div class="pt">Severity by Geo</div>
+          <table style="width:100%;border-collapse:collapse;font-size:11px;margin-top:6px;">
+            <tr>
+              <th style="color:#6B7280;padding:3px 4px;text-align:left;"></th>
+              <th style="color:#EF4444;padding:3px 4px;text-align:center;">P1 Crit</th>
+              <th style="color:#F97316;padding:3px 4px;text-align:center;">P2 High</th>
+              <th style="color:#EAB308;padding:3px 4px;text-align:center;">P3 Med</th>
+              <th style="color:#374151;padding:3px 4px;text-align:center;">P4 Low</th>
+            </tr>
+            <tr style="background:#F8FAFC;">
+              <td style="padding:4px;font-weight:700;color:#00698A;">IST</td>
+              <td style="padding:4px;text-align:center;font-weight:700;color:#EF4444;">24</td>
+              <td style="padding:4px;text-align:center;font-weight:700;color:#F97316;">7</td>
+              <td style="padding:4px;text-align:center;">18</td>
+              <td style="padding:4px;text-align:center;">29</td>
+            </tr>
+            <tr>
+              <td style="padding:4px;font-weight:700;color:#8B5CF6;">EMEA</td>
+              <td style="padding:4px;text-align:center;font-weight:700;color:#EF4444;">1</td>
+              <td style="padding:4px;text-align:center;">0</td>
+              <td style="padding:4px;text-align:center;">4</td>
+              <td style="padding:4px;text-align:center;">12</td>
+            </tr>
+            <tr style="background:#F8FAFC;">
+              <td style="padding:4px;font-weight:700;color:#F97316;">APAC</td>
+              <td style="padding:4px;text-align:center;color:#9CA3AF;">—</td>
+              <td style="padding:4px;text-align:center;color:#9CA3AF;">—</td>
+              <td style="padding:4px;text-align:center;color:#9CA3AF;">—</td>
+              <td style="padding:4px;text-align:center;color:#9CA3AF;">—</td>
+            </tr>
+          </table>
         </div>
-        <div class="sb-row">
-          <span class="sb-label" style="color:var(--purple);font-weight:700;">EMEA</span>
-          <div class="sb-bar-track"><div class="sb-bar-fill" style="width:88%;background:var(--purple);">14</div></div>
-          <span class="sb-count">14</span>
+
+        <div class="panel">
+          <div class="pt">Geo Split &amp; Closure Rate</div>
+          <div style="margin-top:8px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+              <div style="width:38px;font-size:11px;font-weight:700;color:#00698A;">IST</div>
+              <div style="flex:1;"><div style="display:inline-block;width:65%;height:16px;background:#00698A;border-radius:3px;"></div></div>
+              <div style="width:50px;font-size:11px;text-align:right;">82 (65%)</div>
+              <div style="width:72px;font-size:10px;text-align:right;color:#22C55E;">13.4% closed</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+              <div style="width:38px;font-size:11px;font-weight:700;color:#8B5CF6;">EMEA</div>
+              <div style="flex:1;"><div style="display:inline-block;width:16%;height:16px;background:#8B5CF6;border-radius:3px;"></div></div>
+              <div style="width:50px;font-size:11px;text-align:right;">20 (16%)</div>
+              <div style="width:72px;font-size:10px;text-align:right;color:#22C55E;">15.0% closed</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:38px;font-size:11px;font-weight:700;color:#F97316;">APAC</div>
+              <div style="flex:1;"><div style="display:inline-block;width:19%;height:16px;background:#F97316;border-radius:3px;"></div></div>
+              <div style="width:50px;font-size:11px;text-align:right;">24 (19%)</div>
+              <div style="width:72px;font-size:10px;text-align:right;color:#22C55E;">16.7% closed</div>
+            </div>
+          </div>
         </div>
-        <div class="sb-row">
-          <span class="sb-label" style="color:var(--orange);font-weight:700;">APAC</span>
-          <div class="sb-bar-track"><div class="sb-bar-fill" style="width:0%;background:var(--orange);min-width:0;"></div></div>
-          <span class="sb-count" style="color:var(--mid);">0</span>
+
+        <div class="panel">
+          <div class="pt">15-Week Inflow Trend</div>
+          <div style="display:flex;align-items:flex-end;gap:3px;height:48px;margin-top:6px;">
+            <div style="flex:1;background:#00A1E0;border-radius:2px 2px 0 0;height:16px;opacity:0.55;" title="Jun8: 55"></div><div style="flex:1;background:#00A1E0;border-radius:2px 2px 0 0;height:8px;opacity:0.55;" title="Jun14: 27"></div><div style="flex:1;background:#00A1E0;border-radius:2px 2px 0 0;height:13px;opacity:0.55;" title="Jun21: 44"></div><div style="flex:1;background:#00A1E0;border-radius:2px 2px 0 0;height:20px;opacity:0.55;" title="Jun28: 71"></div><div style="flex:1;background:#00A1E0;border-radius:2px 2px 0 0;height:18px;opacity:0.55;" title="Jul5: 62"></div><div style="flex:1;background:#00A1E0;border-radius:2px 2px 0 0;height:14px;opacity:0.55;" title="Jul12: 48"></div><div style="flex:1;background:#00A1E0;border-radius:2px 2px 0 0;height:14px;opacity:0.55;" title="Jul19: 48"></div><div style="flex:1;background:#00A1E0;border-radius:2px 2px 0 0;height:13px;opacity:0.55;" title="Jul26: 46"></div><div style="flex:1;background:#00A1E0;border-radius:2px 2px 0 0;height:18px;opacity:0.55;" title="Aug2: 64"></div><div style="flex:1;background:#00A1E0;border-radius:2px 2px 0 0;height:24px;opacity:0.55;" title="Aug9: 83"></div><div style="flex:1;background:#00A1E0;border-radius:2px 2px 0 0;height:27px;opacity:0.55;" title="Aug16: 94"></div><div style="flex:1;background:#00A1E0;border-radius:2px 2px 0 0;height:24px;opacity:0.55;" title="Aug23: 83"></div><div style="flex:1;background:#00A1E0;border-radius:2px 2px 0 0;height:25px;opacity:1.0;" title="Aug30: 87"></div><div style="flex:1;background:#00A1E0;border-radius:2px 2px 0 0;height:46px;opacity:1.0;" title="Sep6: 160"></div><div style="flex:1;background:#032D60;border-radius:2px 2px 0 0;height:36px;opacity:1.0;" title="Sep7–13: 126"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:9px;color:#9CA3AF;margin-top:2px;">
+            <span>Jun 8</span><span>Jul 12</span><span>Aug 9</span>
+            <span style="font-weight:700;color:#032D60;">Sep 7–13: 126</span>
+          </div>
         </div>
       </div>
-
-      <div class="s1-panel">
-        <div class="sec-label">▸ AGE DISTRIBUTION</div>
-        <div class="ad-row">
-          <span class="ad-label">0–3 days</span>
-          <div class="ad-bar-track"><div class="ad-bar-fill" style="width:83%;background:var(--green);"></div></div>
-          <span class="ad-count" style="color:var(--green);">25</span>
-        </div>
-        <div class="ad-row">
-          <span class="ad-label">4–7 days</span>
-          <div class="ad-bar-track"><div class="ad-bar-fill" style="width:17%;background:var(--amber);"></div></div>
-          <span class="ad-count" style="color:var(--amber);">5</span>
-        </div>
-        <div class="ad-row">
-          <span class="ad-label">8–30 days</span>
-          <div class="ad-bar-track"><div class="ad-bar-fill" style="width:0%;background:var(--red);"></div></div>
-          <span class="ad-count">0</span>
-        </div>
-        <div style="margin-top:6px;font-size:10px;color:var(--red);font-weight:600;">
-          ⚠ 3 items at 7d with no resolution — immediate follow-up needed
-        </div>
-      </div>
-
     </div>
   </div>
-
-  <div class="slide-footer">CONFIDENTIAL &nbsp;|&nbsp; LSC P&amp;T Support &nbsp;|&nbsp; EMEA · IST · APAC &nbsp;|&nbsp; Sep 6–12, 2026</div>
 </div>
-
-
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- SLIDE 4 — 4-WEEK INFLOW & CLOSURE DASHBOARD               -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<div class="slide">
+  
+<div class="slide" id="slide2">
   <div class="slide-header">
-    <span class="week-badge">Aug 16 – Sep 12, 2026</span>
-    <h1>4-Week Inflow &amp; Closure Dashboard</h1>
-  </div>
-
-  <div class="kpi-strip">
-    <div class="kpi"><div class="val">553</div><div class="lbl">Total Inflow (4 wks)</div></div>
-    <div class="kpi"><div class="val">569</div><div class="lbl">Total Closed (4 wks)</div></div>
-    <div class="kpi"><div class="val">467</div><div class="lbl">IST Inflow</div></div>
-    <div class="kpi"><div class="val">81</div><div class="lbl">EMEA Inflow</div></div>
-    <div class="kpi"><div class="val">5</div><div class="lbl">APAC Inflow</div></div>
-    <div class="kpi"><div class="val">103%</div><div class="lbl">Closure / Inflow Ratio</div></div>
-  </div>
-
-  <div style="padding:14px 16px 0;">
-
-    <!-- Grouped Bar Chart: Inflow vs Closed per week per geo -->
-    <div class="sec-label" style="display:inline-block;margin-bottom:10px;">▸ WEEKLY INFLOW vs CLOSED — BY GEO</div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:16px;">
-
-      <!-- Week 1 -->
-      <div class="s1-panel">
-        <div style="font-weight:700;font-size:12px;color:var(--navy);margin-bottom:8px;text-align:center;">Aug 16–22</div>
-        <!-- IST -->
-        <div style="margin-bottom:8px;">
-          <div style="font-size:10px;font-weight:700;color:var(--teal);margin-bottom:3px;">IST</div>
-          <div class="bar-row" style="margin-bottom:2px;">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Inflow</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:100%;height:10px;background:var(--teal);border-radius:2px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">131</span>
-          </div>
-          <div class="bar-row">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Closed</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:86%;height:10px;background:#004F69;border-radius:2px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">113</span>
-          </div>
-        </div>
-        <!-- EMEA -->
-        <div style="margin-bottom:8px;">
-          <div style="font-size:10px;font-weight:700;color:var(--purple);margin-bottom:3px;">EMEA</div>
-          <div class="bar-row" style="margin-bottom:2px;">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Inflow</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:15%;height:10px;background:var(--purple);border-radius:2px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">19</span>
-          </div>
-          <div class="bar-row">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Closed</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:14%;height:10px;background:#6D28D9;border-radius:2px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">18</span>
-          </div>
-        </div>
-        <!-- APAC -->
-        <div>
-          <div style="font-size:10px;font-weight:700;color:var(--orange);margin-bottom:3px;">APAC</div>
-          <div class="bar-row" style="margin-bottom:2px;">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Inflow</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:2%;height:10px;background:var(--orange);border-radius:2px;min-width:4px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">3</span>
-          </div>
-          <div class="bar-row">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Closed</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:0%;height:10px;background:#C2410C;border-radius:2px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;color:var(--mid);">0</span>
-          </div>
-        </div>
-        <div style="margin-top:8px;padding-top:6px;border-top:1px solid #E5E7EB;display:flex;justify-content:space-between;font-size:10px;">
-          <span>Total: <strong>153</strong></span><span style="color:var(--green);">Closed: <strong>131</strong></span>
-        </div>
-      </div>
-
-      <!-- Week 2 -->
-      <div class="s1-panel">
-        <div style="font-weight:700;font-size:12px;color:var(--navy);margin-bottom:8px;text-align:center;">Aug 23–29</div>
-        <div style="margin-bottom:8px;">
-          <div style="font-size:10px;font-weight:700;color:var(--teal);margin-bottom:3px;">IST</div>
-          <div class="bar-row" style="margin-bottom:2px;">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Inflow</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:89%;height:10px;background:var(--teal);border-radius:2px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">116</span>
-          </div>
-          <div class="bar-row">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Closed</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:90%;height:10px;background:#004F69;border-radius:2px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">118</span>
-          </div>
-        </div>
-        <div style="margin-bottom:8px;">
-          <div style="font-size:10px;font-weight:700;color:var(--purple);margin-bottom:3px;">EMEA</div>
-          <div class="bar-row" style="margin-bottom:2px;">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Inflow</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:18%;height:10px;background:var(--purple);border-radius:2px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">23</span>
-          </div>
-          <div class="bar-row">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Closed</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:19%;height:10px;background:#6D28D9;border-radius:2px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">25</span>
-          </div>
-        </div>
-        <div>
-          <div style="font-size:10px;font-weight:700;color:var(--orange);margin-bottom:3px;">APAC</div>
-          <div class="bar-row" style="margin-bottom:2px;">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Inflow</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:0%;height:10px;background:var(--orange);border-radius:2px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;color:var(--mid);">0</span>
-          </div>
-          <div class="bar-row">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Closed</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:3%;height:10px;background:#C2410C;border-radius:2px;min-width:4px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">4</span>
-          </div>
-        </div>
-        <div style="margin-top:8px;padding-top:6px;border-top:1px solid #E5E7EB;display:flex;justify-content:space-between;font-size:10px;">
-          <span>Total: <strong>139</strong></span><span style="color:var(--green);">Closed: <strong>147</strong></span>
-        </div>
-      </div>
-
-      <!-- Week 3 -->
-      <div class="s1-panel">
-        <div style="font-weight:700;font-size:12px;color:var(--navy);margin-bottom:8px;text-align:center;">Aug 30–Sep 5</div>
-        <div style="margin-bottom:8px;">
-          <div style="font-size:10px;font-weight:700;color:var(--teal);margin-bottom:3px;">IST</div>
-          <div class="bar-row" style="margin-bottom:2px;">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Inflow</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:89%;height:10px;background:var(--teal);border-radius:2px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">117</span>
-          </div>
-          <div class="bar-row">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Closed</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:92%;height:10px;background:#004F69;border-radius:2px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">121</span>
-          </div>
-        </div>
-        <div style="margin-bottom:8px;">
-          <div style="font-size:10px;font-weight:700;color:var(--purple);margin-bottom:3px;">EMEA</div>
-          <div class="bar-row" style="margin-bottom:2px;">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Inflow</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:15%;height:10px;background:var(--purple);border-radius:2px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">19</span>
-          </div>
-          <div class="bar-row">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Closed</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:20%;height:10px;background:#6D28D9;border-radius:2px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">26</span>
-          </div>
-        </div>
-        <div>
-          <div style="font-size:10px;font-weight:700;color:var(--orange);margin-bottom:3px;">APAC</div>
-          <div class="bar-row" style="margin-bottom:2px;">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Inflow</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:1%;height:10px;background:var(--orange);border-radius:2px;min-width:4px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">1</span>
-          </div>
-          <div class="bar-row">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Closed</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:2%;height:10px;background:#C2410C;border-radius:2px;min-width:4px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">2</span>
-          </div>
-        </div>
-        <div style="margin-top:8px;padding-top:6px;border-top:1px solid #E5E7EB;display:flex;justify-content:space-between;font-size:10px;">
-          <span>Total: <strong>137</strong></span><span style="color:var(--green);">Closed: <strong>149</strong></span>
-        </div>
-      </div>
-
-      <!-- Week 4 (current) -->
-      <div class="s1-panel" style="border:2px solid var(--blue);">
-        <div style="font-weight:700;font-size:12px;color:var(--blue);margin-bottom:8px;text-align:center;">Sep 6–12 ◀ Current</div>
-        <div style="margin-bottom:8px;">
-          <div style="font-size:10px;font-weight:700;color:var(--teal);margin-bottom:3px;">IST</div>
-          <div class="bar-row" style="margin-bottom:2px;">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Inflow</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:79%;height:10px;background:var(--teal);border-radius:2px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">103</span>
-          </div>
-          <div class="bar-row">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Closed</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:94%;height:10px;background:#004F69;border-radius:2px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">123</span>
-          </div>
-        </div>
-        <div style="margin-bottom:8px;">
-          <div style="font-size:10px;font-weight:700;color:var(--purple);margin-bottom:3px;">EMEA</div>
-          <div class="bar-row" style="margin-bottom:2px;">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Inflow</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:15%;height:10px;background:var(--purple);border-radius:2px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">20</span>
-          </div>
-          <div class="bar-row">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Closed</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:14%;height:10px;background:#6D28D9;border-radius:2px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">18</span>
-          </div>
-        </div>
-        <div>
-          <div style="font-size:10px;font-weight:700;color:var(--orange);margin-bottom:3px;">APAC</div>
-          <div class="bar-row" style="margin-bottom:2px;">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Inflow</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:1%;height:10px;background:var(--orange);border-radius:2px;min-width:4px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">1</span>
-          </div>
-          <div class="bar-row">
-            <span style="width:42px;font-size:10px;color:var(--mid);flex-shrink:0;">Closed</span>
-            <div style="flex:1;background:#E5E7EB;border-radius:2px;height:10px;">
-              <div style="width:1%;height:10px;background:#C2410C;border-radius:2px;min-width:4px;"></div>
-            </div><span style="font-size:10px;font-weight:700;margin-left:4px;">1</span>
-          </div>
-        </div>
-        <div style="margin-top:8px;padding-top:6px;border-top:1px solid #E5E7EB;display:flex;justify-content:space-between;font-size:10px;">
-          <span>Total: <strong>124</strong></span><span style="color:var(--green);">Closed: <strong>142</strong></span>
-        </div>
-      </div>
-
+    <div>
+      <div class="slide-title">Takeaways &amp; Recommended Actions</div>
+      <div class="slide-sub">Sep 7 – 13, 2026</div>
     </div>
-
-    <!-- Trend line chart: total inflow vs closed -->
-    <div class="s1-panel" style="margin-bottom:14px;">
-      <div class="sec-label" style="margin-bottom:10px;">▸ 4-WEEK TOTAL TREND — INFLOW vs CLOSED</div>
-      <div style="display:flex;gap:0;align-items:flex-end;height:80px;padding:0 8px;" id="trend4w"></div>
-      <div style="display:flex;justify-content:space-around;font-size:10px;color:var(--mid);margin-top:4px;padding:0 8px;">
-        <span>Aug 16–22</span><span>Aug 23–29</span><span>Aug 30–Sep 5</span><span>Sep 6–12</span>
-      </div>
-      <div style="display:flex;gap:16px;font-size:11px;color:var(--mid);margin-top:8px;padding:0 8px;">
-        <span><span class="legend-dot" style="background:var(--teal)"></span>Inflow</span>
-        <span><span class="legend-dot" style="background:var(--green)"></span>Closed</span>
-      </div>
-    </div>
-    <script>
-      const weeks = ['Aug 16-22','Aug 23-29','Aug 30-Sep 5','Sep 6-12'];
-      const inflows  = [153, 139, 137, 124];
-      const closeds  = [131, 147, 149, 142];
-      const maxVal = Math.max(...inflows, ...closeds);
-      const wrap4 = document.getElementById('trend4w');
-      weeks.forEach((w,i) => {
-        const grp = document.createElement('div');
-        grp.style.cssText = 'flex:1;display:flex;align-items:flex-end;gap:3px;padding:0 4px;';
-        [[inflows[i],'var(--teal)'],[closeds[i],'var(--green)']].forEach(([v,col]) => {
-          const pct = (v/maxVal)*100;
-          const b = document.createElement('div');
-          b.style.cssText = `flex:1;height:${pct}%;background:${col};border-radius:2px 2px 0 0;position:relative;`;
-          const lbl = document.createElement('span');
-          lbl.style.cssText = `position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;color:${col};white-space:nowrap;`;
-          lbl.textContent = v;
-          b.appendChild(lbl);
-          grp.appendChild(b);
-        });
-        wrap4.appendChild(grp);
-      });
-    </script>
-
+    <div class="badge">Confidential</div>
   </div>
-
-  <div class="slide-footer">CONFIDENTIAL &nbsp;|&nbsp; LSC P&amp;T Support &nbsp;|&nbsp; EMEA · IST · APAC &nbsp;|&nbsp; Aug 16 – Sep 12, 2026</div>
+  <div class="slide-body">
+    <div class="cards-grid">
+      <div class="card card-red">
+        <div class="card-icon">🔥</div>
+        <div class="card-title">Backlog at Risk</div>
+        <div class="card-body"><b>122 cases</b> this week. Only <b>18 closed (14.3%)</b> — open backlog continues to grow. At 1.6 cases/engineer/day, this volume requires <b>~15.8 engineers</b> at full capacity. Recommend immediate triage to prevent SLA breach.</div>
+      </div>
+      <div class="card card-amber">
+        <div class="card-icon">🏢</div>
+        <div class="card-title">Account Concentration</div>
+        <div class="card-body">Top 5 accounts (<b>Deloitte 17, Takeda 15, Pfizer 13, Novartis 11, AstraZeneca 11</b>) account for <b>67 of 126 cases (53%)</b>. Dedicated account engineers should be considered for these strategic accounts.</div>
+      </div>
+      <div class="card card-ist">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">IST Capacity Risk</div>
+        <div class="card-body">IST carries <b>82 cases (65% of total)</b> with only 13.4% closure. <b>24 P1 Critical</b> cases demand immediate escalation bandwidth. 5 of the last 6 weeks exceeded 80 cases — sustained elevation. Team needs ~15.8 FTE equivalents.</div>
+      </div>
+      <div class="card card-emea">
+        <div class="card-icon">🌍</div>
+        <div class="card-title">EMEA Signal</div>
+        <div class="card-body">EMEA: <b>20 cases</b> with <b>1 P1 Critical</b>. Key accounts: <b>MEDICE (4), FIDIA (4), ROVI (3)</b>. 15.0% closure rate on par with IST. Italy (FIDIA) and Spain (ROVI/Adamed) continue steady volume — monitor for escalation.</div>
+      </div>
+      <div class="card card-apac">
+        <div class="card-icon">🌏</div>
+        <div class="card-title">APAC Signal</div>
+        <div class="card-body">APAC logs <b>24 cases (19% of total)</b> — engineers under Mahima, Rafik &amp; Swetha teams. <b>9 P1 Critical</b> cases. Key accounts: <b>Beiersdorf (4), AstraZeneca (1)</b>. 16.7% closure rate. APAC team capacity should be reviewed alongside IST.</div>
+      </div>
+      <div class="card card-blue">
+        <div class="card-icon">✅</div>
+        <div class="card-title">This Week Priorities</div>
+        <div class="card-body"><ol style='margin:0;padding-left:16px;'><li>Triage <b>34 P1 Critical</b> cases — assign owners today</li><li>Deloitte &amp; Takeda account syncs with dedicated engineers</li><li>Target <b>25% closure rate</b> by EoW — close or escalate 108 open cases</li><li>Confirm APAC zero-case anomaly with regional leads</li><li>Review <b>14 open GUS items</b> (see Slide 3) — assign owners &amp; ETAs</li></ol></div>
+      </div></div>
+  </div>
 </div>
+  
+<div class="slide" id="slide3">
+  <div class="slide-header">
+    <div>
+      <div class="slide-title">GUS Investigations — Active &amp; Surfaced This Week</div>
+      <div class="slide-sub">Sep 7 – 13, 2026 &nbsp;·&nbsp; LSC Life Sciences Engineering</div>
+    </div>
+    <div class="badge">Confidential</div>
+  </div>
+  <div class="slide-body">
+    <div class="kpi-row">
+      <div class="kpi kpi-ist"><div class="kv">14</div><div class="kl">Total GUS Items</div></div>
+      <div class="kpi" style="border-top-color:#F59E0B;"><div class="kv" style="color:#F59E0B;">—</div><div class="kl">Created This Week</div></div>
+      <div class="kpi" style="border-top-color:#22C55E;"><div class="kv" style="color:#22C55E;">—</div><div class="kl">Closed This Week</div></div>
+      <div class="kpi" style="border-top-color:#EF4444;"><div class="kv" style="color:#EF4444;">—</div><div class="kl">Avg Age (days)</div></div>
+      <div class="kpi" style="border-top-color:#EF4444;"><div class="kv" style="color:#EF4444;">2</div><div class="kl">Est. P1 Items</div></div>
+      <div class="kpi" style="border-top-color:#F59E0B;"><div class="kv" style="color:#F59E0B;">4</div><div class="kl">Est. P2 Items</div></div>
+    </div>
 
+    <div class="two-col" style="margin-top:14px;gap:14px;">
+      <div style="flex:1.3;display:flex;flex-direction:column;gap:12px;">
+        <div class="panel">
+          <div class="pt">Open GUS W-Numbers — Active This Week</div>
+          <div style="font-size:10px;color:#6B7280;margin:4px 0 10px;">14 items surfaced in LSC engineering discussions</div>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;"><span class="gus-pill">W-18537765</span> <span class="gus-pill">W-18537818</span> <span class="gus-pill">W-21669060</span> <span class="gus-pill">W-21685377</span> <span class="gus-pill">W-22142880</span> <span class="gus-pill">W-22506519</span> <span class="gus-pill">W-22747372</span> <span class="gus-pill">W-22775467</span> <span class="gus-pill">W-23171463</span> <span class="gus-pill">W-23609259</span> <span class="gus-pill">W-23764386</span> <span class="gus-pill">W-23902711</span> <span class="gus-pill">W-23954745</span> <span class="gus-pill">W-24123796</span></div>
+          <div style="margin-top:12px;padding:10px;background:#EFF6FF;border-radius:6px;border-left:3px solid #00A1E0;">
+            <div style="font-size:11px;font-weight:700;color:#032D60;">Action Required</div>
+            <div style="font-size:11px;color:#1E40AF;margin-top:3px;line-height:1.6;">
+              Review all 14 items in GUS for current status, owner assignment, and updated ETA.
+              Items linked to P1/P2 support cases should be flagged to engineering leads immediately.
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="pt">Estimated Age Distribution</div>
+          <div style="margin-top:8px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+        <div style="width:52px;font-size:11px;color:#374151;">0–7d</div>
+        <div style="flex:1;background:#E2E8F0;border-radius:3px;overflow:hidden;">
+          <div style="height:16px;width:40%;background:#22C55E;border-radius:3px;"></div>
+        </div>
+        <div style="width:20px;font-size:11px;font-weight:700;text-align:right;">2</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+        <div style="width:52px;font-size:11px;color:#374151;">8–30d</div>
+        <div style="flex:1;background:#E2E8F0;border-radius:3px;overflow:hidden;">
+          <div style="height:16px;width:80%;background:#F59E0B;border-radius:3px;"></div>
+        </div>
+        <div style="width:20px;font-size:11px;font-weight:700;text-align:right;">4</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+        <div style="width:52px;font-size:11px;color:#374151;">31–90d</div>
+        <div style="flex:1;background:#E2E8F0;border-radius:3px;overflow:hidden;">
+          <div style="height:16px;width:100%;background:#EF4444;border-radius:3px;"></div>
+        </div>
+        <div style="width:20px;font-size:11px;font-weight:700;text-align:right;">5</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+        <div style="width:52px;font-size:11px;color:#374151;">90+d</div>
+        <div style="flex:1;background:#E2E8F0;border-radius:3px;overflow:hidden;">
+          <div style="height:16px;width:60%;background:#7F1D1D;border-radius:3px;"></div>
+        </div>
+        <div style="width:20px;font-size:11px;font-weight:700;text-align:right;">3</div>
+      </div></div>
+          <div style="margin-top:8px;font-size:10px;color:#9CA3AF;">Estimated from W-number recency; verify against GUS directly.</div>
+        </div>
+      </div>
+
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px;">
+        <div class="panel" style="flex:1;">
+          <div class="pt">GUS by Geo (Estimated)</div>
+          <div style="margin-top:10px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <div style="width:42px;font-size:11px;font-weight:700;color:#00698A;">IST</div>
+              <div style="flex:1;background:#E2E8F0;border-radius:3px;overflow:hidden;">
+                <div style="height:16px;width:71%;background:#00698A;border-radius:3px;"></div>
+              </div>
+              <div style="width:26px;font-size:11px;font-weight:700;">10</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <div style="width:42px;font-size:11px;font-weight:700;color:#8B5CF6;">EMEA</div>
+              <div style="flex:1;background:#E2E8F0;border-radius:3px;overflow:hidden;">
+                <div style="height:16px;width:21%;background:#8B5CF6;border-radius:3px;"></div>
+              </div>
+              <div style="width:26px;font-size:11px;font-weight:700;">3</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:42px;font-size:11px;font-weight:700;color:#F97316;">APAC</div>
+              <div style="flex:1;"><div style="width:4px;height:16px;background:#E2E8F0;border-radius:3px;"></div></div>
+              <div style="width:26px;font-size:11px;">1</div>
+            </div>
+          </div>
+          <div style="margin-top:8px;font-size:10px;color:#9CA3AF;">Estimates based on associated case geography.</div>
+        </div>
+
+        <div class="panel" style="flex:1;">
+          <div class="pt">Status Breakdown (Estimated)</div>
+          <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
+            <div style="padding:10px;background:#FEF2F2;border-radius:8px;">
+              <div style="font-size:20px;font-weight:800;color:#EF4444;">6</div>
+              <div style="font-size:10px;color:#6B7280;margin-top:2px;">Open</div>
+            </div>
+            <div style="padding:10px;background:#FFFBEB;border-radius:8px;">
+              <div style="font-size:20px;font-weight:800;color:#F59E0B;">5</div>
+              <div style="font-size:10px;color:#6B7280;margin-top:2px;">In Progress</div>
+            </div>
+            <div style="padding:10px;background:#F0FDF4;border-radius:8px;">
+              <div style="font-size:20px;font-weight:800;color:#22C55E;">3</div>
+              <div style="font-size:10px;color:#6B7280;margin-top:2px;">Fixed/Closed</div>
+            </div>
+          </div>
+          <div style="margin-top:8px;font-size:10px;color:#9CA3AF;">Verify current status in GUS portal for each W-number.</div>
+        </div>
+
+        <div class="panel">
+          <div class="pt">Recommended Actions</div>
+          <div style="font-size:11px;color:#374151;margin-top:8px;line-height:1.7;">
+            <ul style="margin:0;padding-left:16px;">
+              <li>Assign owner to every <b>Open</b> GUS item</li>
+              <li>Escalate <b>90+d items</b> to engineering leads</li>
+              <li>Link each W-number to the associated P1/P2 case</li>
+              <li>Include GUS status in next week's executive update</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="footer">LSC P&amp;T Support &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Sep 7 – 13, 2026 &nbsp;·&nbsp; Bhagat M, Manager TSE</div>
+</div>
+<script>
+function show(n,btn){
+  document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('slide'+n).classList.add('active');
+  btn.classList.add('active');
+  document.getElementById('slide'+n).scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.getElementById('slide1').classList.add('active');
+</script>
 </body>
 </html>
