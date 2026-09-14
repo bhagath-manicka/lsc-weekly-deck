@@ -240,32 +240,32 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div class="card card-red">
         <div class="card-icon">🔥</div>
         <div class="card-title">Backlog at Risk</div>
-        <div class="card-body"><b>122 cases</b> this week. Only <b>18 closed (14.3%)</b> — open backlog continues to grow. At 2.1 cases/engineer/day, this volume requires <b>~12.0 engineers</b> at full capacity. Recommend immediate triage to prevent SLA breach.</div>
+        <div class="card-body"><b>126 cases</b> this week — down 21% from last week's 160, but inflow remains elevated. Only <b>18 closed (14.3%)</b> — <b>108 net new cases</b> added to open backlog. At 2.1 cases/engineer/day, this week alone required <b>~12.0 engineers</b> at full capacity. Closure rate must exceed 50% to stop backlog growth.</div>
       </div>
       <div class="card card-amber">
         <div class="card-icon">🏢</div>
         <div class="card-title">Account Concentration</div>
-        <div class="card-body">Top 5 accounts (<b>Deloitte 17, Takeda 15, Pfizer 13, Novartis 11, AstraZeneca 11</b>) account for <b>67 of 126 cases (53%)</b>. Dedicated account engineers should be considered for these strategic accounts.</div>
+        <div class="card-body"><b>Deloitte (Global + Consulting) = 21 cases</b> — single largest account concentration. Top 5 (<b>Deloitte 21, Takeda 14, Pfizer 12, AstraZeneca 11, Novartis 11</b>) = <b>69 of 126 cases (55%)</b>. Takeda (14) and Pfizer (12) are 100% IST-owned — no geo diversification. Recommend named account engineers for Deloitte, Takeda, and Pfizer.</div>
       </div>
       <div class="card card-ist">
         <div class="card-icon">⚡</div>
         <div class="card-title">IST Capacity Risk</div>
-        <div class="card-body">IST carries <b>82 cases (65% of total)</b> with only 13.4% closure. <b>24 P1 Critical</b> cases demand immediate escalation bandwidth. 5 of the last 6 weeks exceeded 80 cases — sustained elevation. Team needs ~12.0 FTE equivalents.</div>
+        <div class="card-body">IST carries <b>82 cases (65% of total)</b> — only 13.4% closed. <b>24 of 34 P1 Criticals (71%) are IST</b> — P1 burden is even more concentrated than volume. All 6 of the last 6 weeks exceeded 80 cases. IST alone needs <b>~7.8 FTE</b> at current rate; full-team equivalent is ~12.0 FTE.</div>
       </div>
       <div class="card card-emea">
         <div class="card-icon">🌍</div>
         <div class="card-title">EMEA Signal</div>
-        <div class="card-body">EMEA: <b>20 cases</b> with <b>1 P1 Critical</b>. Key accounts: <b>MEDICE (4), FIDIA (4), ROVI (3)</b>. 15.0% closure rate on par with IST. Italy (FIDIA) and Spain (ROVI/Adamed) continue steady volume — monitor for escalation.</div>
+        <div class="card-body">EMEA: <b>20 cases</b>, only <b>1 P1 Critical</b> (5% P1 rate vs IST 29%). <b>60% of EMEA cases are P4 Low</b> (12/20) — severity profile far lighter than other geos; <b>zero P2</b>. Best closure rate at 15.0%. Key accounts: <b>MEDICE (4), FIDIA Farmaceutici (4)</b> — both Italy/Germany pharma. Monitor: 3 unresolved EMEA cases outside top accounts may be emerging.</div>
       </div>
       <div class="card card-apac">
         <div class="card-icon">🌏</div>
         <div class="card-title">APAC Signal</div>
-        <div class="card-body"><b>24 APAC cases</b> across Mahima, Rafik &amp; Swetha teams — <b>7 P1s still open</b>. <b>iPad/Mobile issues dominate: 9 of 24 cases</b> span rendering failures, widget breakage, and LWC limitations on LSC iPad across Deloitte (2), ZS Associates, Pfizer, Takeda, Abbvie, Hypera Farma, and Beren Therapeutics. <b>Beiersdorf: 4 cases, 3 P1</b> — COFH account summarization, PATI field population, visit submission, and activity goal job failures. <b>AstraZeneca P1</b>: SOQL 101-query limit breach on Consent page — production-blocking. <b>Harrow Health P1</b>: automated deletion of Visits and Signatures — data integrity risk. Recommend: (1) iPad/Mobile defect war room, (2) Beiersdorf P1 escalation path, (3) AZ SOQL fix prioritized.</div>
+        <div class="card-body"><b>24 APAC cases</b> — <b>9/24 = 38% P1 rate</b>, highest of any geo. <b>iPad/Mobile: 9 cases</b> (rendering failures, LWC widget breakage) across Deloitte, ZS Associates, Takeda, Abbvie, Hypera Farma, Beren Therapeutics. <b>Beiersdorf: 4 cases, 3 P1</b> — COFH summarization, PATI field, visit submission, activity goal failures. <b>AstraZeneca P1</b>: SOQL 101-limit on Consent page — production-blocking. <b>Harrow Health P1</b>: automated deletion of Visits &amp; Signatures — data integrity risk. Actions: iPad defect war room; Beiersdorf P1 escalation; AZ SOQL fix.</div>
       </div>
       <div class="card card-blue">
         <div class="card-icon">✅</div>
         <div class="card-title">This Week Priorities</div>
-        <div class="card-body"><ol style='margin:0;padding-left:16px;'><li>Triage <b>34 P1 Critical</b> cases — assign owners today</li><li>Deloitte &amp; Takeda account syncs with dedicated engineers</li><li>Target <b>25% closure rate</b> by EoW — close or escalate 108 open cases</li><li>Confirm APAC zero-case anomaly with regional leads</li><li>Review <b>14 GUS items</b> on Slide 3 — 10 open, 3 closed but no fix build confirmed</li></ol></div>
+        <div class="card-body"><ol style='margin:0;padding-left:16px;'><li>Assign owners to all <b>34 P1 Criticals</b> — IST (24), APAC (9), EMEA (1)</li><li><b>Deloitte war room</b> (21 cases combined) — single-team ownership across Global &amp; Consulting</li><li>iPad/Mobile escalation path — 9 APAC cases, GUS W-22747372 / W-22775467 open</li><li>Confirm fixed package for <b>W-21669060, W-22142880, W-22506519</b> — 3 closed-but-still-hitting customers</li><li>Target <b>30% closure this week</b> (~38 cases) to begin reducing accumulated backlog</li></ol></div>
       </div></div>
   </div>
 </div>
